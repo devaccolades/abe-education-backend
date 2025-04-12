@@ -1,0 +1,60 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.venv/
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+
+# Secret settings
+.env
+config/settings/local.py
+config/settings/dev.py
+
+# Database
+*.sqlite3
+/db.sqlite3
+
+# Media & Static files
+/media/*
+*/media
+*/static
+*/staticfiles
+/static
+/staticfiles
+
+# Django migrations
+**/migrations/*.pyc
+**/migrations/*.pyo
+**/migrations/*.orig
+
+# Cache and session data
+*.swp
+*.swo
+
+# IDE files
+.vscode/
+.idea/
+
+# macOS system files
+.DS_Store
+
+# npm & node_modules
+node_modules/
+
+# Coverage reports
+htmlcov/
+.coverage
+
+# Pytest cache
+.pytest_cache/
+
+# Celery beat schedule file
+celerybeat-schedule
