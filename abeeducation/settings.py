@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+from decouple import config
+from django.conf import settings
+import os
+from django.templatetags.static import static
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,9 +47,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'core',
+    'leads',
+    'career',
+    'destination',
+    
+    'ckeditor',
     'rest_framework',
     'django_filters',
     'drf_spectacular',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +66,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'abeeducation.urls'
@@ -79,12 +93,24 @@ WSGI_APPLICATION = 'abeeducation.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('dbname'),                      
+        'USER': config('dbuser'),
+        'PASSWORD': config('dbpass'),
+        'HOST': config('dbhost'),
+        'PORT': '5432',
     }
-}
+}  
+
 
 
 # Password validation
@@ -111,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -122,12 +148,33 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3004",
+    ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
+}
 REST_FRAMEWORK = {
     # YOUR SETTINGS
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
@@ -139,4 +186,68 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
+}
+
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+
+
+UNFOLD = {
+    "SITE_TITLE": "Abe Education Admin",  # Updated Title
+    "SITE_HEADER": "Abe Education Admin", 
+        
+  
+
+    "SIDEBAR": {
+        "show_search": True,
+        
+          },
+    # Updated Logos
+        "SITE_ICON": lambda request: static("branding/logo.png"),  
+        "SITE_LOGO": lambda request: static("branding/logo.png"),  
+
+    "LIST_DISPLAY_HEADER_ACTIONS": False, 
+
+    # Color scheme
+    "COLORS": {
+    "base": {
+        "50": "249 250 251",
+        "100": "243 244 246",
+        "200": "220 220 220", 
+        "300": "200 200 200",  
+        "400": "156 163 175",
+        "500": "107 114 128",
+        "600": "75 85 99",
+        "700": "50 50 50", 
+        "800": "30 30 30", 
+        "900": "20 20 20", 
+        "950": "10 10 10",  
+    },
+    "primary": {
+        "50": "255 235 235",
+        "100": "255 210 210",
+        "200": "255 180 180",
+        "300": "255 140 140",
+        "400": "255 100 100",
+        "500": "255 56 59",  
+        "600": "230 40 45",
+        "700": "200 30 35",
+        "800": "170 20 25",
+        "900": "140 10 15",
+        "950": "110 5 10",
+    },
+    "font": {
+        "subtle-light": "var(--color-base-500)",  
+        "subtle-dark": "var(--color-base-400)",  
+        "default-light": "var(--color-base-600)", 
+        "default-dark": "var(--color-base-300)", 
+        "important-light": "var(--color-base-900)",  
+        "important-dark": "var(--color-base-100)",  
+    },
+    
+},
 }
