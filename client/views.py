@@ -243,7 +243,39 @@ class BankPropertyDocumentsView(APIView):
             return Response(serializer.data)
         except Exception as e:
             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class CountryViewset(APIView):
+    serializer_class = core_serializer.CountrySerializer
+
+    def get(self, request):
+        try:
+            data = core_models.Country.objects.filter(is_deleted=False)
+            serializer = self.serializer_class(data, many=True, context={"request": request})
+            return Response(serializer.data)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
+class StudyLevelViewset(APIView):
+    serializer_class = core_serializer.StudyLevelSerializer
+
+    def get(self, request):
+        try:
+            data = core_models.StudyLevel.objects.filter(is_deleted=False)
+            serializer = self.serializer_class(data, many=True, context={"request": request})
+            return Response(serializer.data)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                
+class EventsViewset(APIView):
+    serializer_class = core_serializer.EventSerializer
+    def get(self, request):
+        try:
+            data = core_models.Events.objects.filter(is_deleted=False)
+            serializer = self.serializer_class(data, many=True, context={"request": request})
+            return Response(serializer.data)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                
 #careers
 class CareersViewset(APIView):
     serializer_class = careers_serializer.CareerSerializer

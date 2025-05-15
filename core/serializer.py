@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import *
+from destination.serializer import DestinationsSerializer
+
 
 class SEOSerializer(serializers.ModelSerializer):
     class Meta:
@@ -56,3 +58,22 @@ class BankPropertyDocumentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = BankPropertyDocuments
         fields = '__all__'
+
+class CountrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Country
+        fields = '__all__'
+
+class StudyLevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudyLevel
+        fields = ['id', 'level_name']
+
+class EventSerializer(serializers.ModelSerializer):
+    study_destination = DestinationsSerializer(many=True, read_only=True)
+    study_level = StudyLevelSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Events
+        fields = ['id', 'title', 'description', 'start_date', 'end_date', 'start_time', 'end_time', 'location', 'services', 'study_destination', 'study_level', 'about_event', 'image', 'image_alt', 'card_image', 'card_image_alt', 'meta_title', 'meta_description', 'slug']
+

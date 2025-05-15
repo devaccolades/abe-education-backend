@@ -1,14 +1,19 @@
 from django.db import models
 
 from core.models import *
-
 # Create your models here.
 class Destinations(BaseModel):
     destination = models.CharField(max_length=16, null=True, blank=True)
     flag_image = models.FileField(upload_to='destinations', blank=True, null=True)
     flag_alt = models.CharField(max_length=20, null=True, blank=True)
+    home_image = models.FileField(upload_to='destinations', blank=True, null=True)
+    home_image_alt = models.CharField(max_length=20, null=True, blank=True)
+    home_description = models.CharField(max_length=260, null=True, blank=True)
     meta_title = models.CharField(max_length=100, null=True, blank=True)
     meta_description = models.CharField(max_length=200, null=True, blank=True)
+    specialization_image = models.FileField(upload_to='destinations', blank=True, null=True)
+    specialization_image_alt = models.CharField(max_length=20, null=True, blank=True)
+    specialization_description = models.CharField(max_length=260, null=True, blank=True)
 
     class Meta:
         db_table = 'destination.destinations'

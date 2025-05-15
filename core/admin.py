@@ -66,3 +66,20 @@ class BankPropertyDocumentsAdmin(ModelAdmin):
     search_fields = ('list_content',)
     list_filter = ('date_added', 'is_deleted')
 
+@admin.register(Country)
+class CountryAdmin(ModelAdmin):
+    list_display = ('country', 'flag_image', 'flag_alt',  'date_added', 'date_updated', 'is_deleted')
+    search_fields = ('country', 'flag_alt')
+    list_filter = ('date_added', 'is_deleted')
+
+@admin.register(StudyLevel)
+class StudyLevelAdmin(ModelAdmin):
+    list_display = ('level_name', 'date_added', 'date_updated', 'is_deleted')
+    search_fields = ('level_name',)
+    list_filter = ('date_added', 'is_deleted')
+
+@admin.register(Events)
+class EventsAdmin(ModelAdmin):
+    list_display = ('title', 'start_date', 'end_date', 'location', 'date_added', 'date_updated', 'is_deleted')
+    search_fields = ('title', 'description', 'location')
+    list_filter = ('date_added', 'is_deleted')

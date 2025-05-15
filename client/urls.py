@@ -13,6 +13,10 @@ urlpatterns = [
     path('bank-details/', views.BankDetailsViewset.as_view(), name='bank-details'),
     path('gallery/', views.GalleryViewset.as_view(), name='gallery-list'),
     path('bank-property-documents/', views.BankPropertyDocumentsView.as_view(), name='bank-property-documents'),
+    path('countries/', views.CountryViewset.as_view(), name='countries-list'),
+    path('study-level/', views.StudyLevelViewset.as_view(), name='study-level-list'),
+    path('events/', views.EventsViewset.as_view(), name='events-list'),
+    
 
     path('perks/', views.PerksView.as_view(), name='perks'),
     path('careers/', views.CareersViewset.as_view(), name='careers-list'),

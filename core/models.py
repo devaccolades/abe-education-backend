@@ -6,6 +6,10 @@ from datetime import datetime
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 
+# from destination.models import Destinations
+# from core.base import BaseModel
+
+
 # Create your models here.
 
 
@@ -223,4 +227,59 @@ class Gallery(BaseModel):
 
     def __str__(self):
         return f"Gallery {self.id}"
-   
+
+class StudyLevel(BaseModel):
+    level_name = models.CharField(max_length=100, blank=True, null=True)  
+
+    class Meta:
+        db_table = 'core.study_level'
+        verbose_name = 'Study Level'
+        verbose_name_plural = 'Study Level'
+        ordering = ('-date_added',)
+
+    def __str__(self):
+        return str(self.level_name) if self.level_name else str(self.id)
+ 
+class Country(BaseModel):
+    country = models.CharField(max_length=16, null=True, blank=True)
+    flag_image = models.FileField(upload_to='country', blank=True, null=True)
+    flag_alt = models.CharField(max_length=20, null=True, blank=True)
+    
+    class Meta:
+        db_table = 'core.country'
+        verbose_name = 'Country'
+        verbose_name_plural = 'Countries'
+        ordering = ('-date_added',)
+
+    def __str__(self):
+        return f"Destinations {self.id}"
+    
+class Events(BaseModel):
+    title = models.CharField(max_length=300, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    start_date = models.DateField( blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
+    start_time = models.TimeField( blank=True, null=True)
+    end_time = models.TimeField( blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
+    services = models.CharField(max_length=255, blank=True, null=True)
+    study_destination = models.ManyToManyField(Country, blank=True)
+    study_level = models.ManyToManyField(StudyLevel, blank=True)
+    about_event = RichTextField(blank=True, null=True)
+    image = models.ImageField(upload_to='events/images', blank=True, null=True)
+    image_alt = models.CharField(max_length=125, null=True, blank=True)
+    card_image = models.ImageField(upload_to='events/card_images', blank=True, null=True)
+    card_image_alt = models.CharField(max_length=125, null=True, blank=True)
+    meta_title = models.CharField(max_length=300, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
+    slug = models.SlugField(unique=True)
+
+    class Meta:
+        db_table = 'core.events'
+        verbose_name = 'Event'
+        verbose_name_plural = 'Events'
+        ordering = ('-date_added',)
+
+    def __str__(self):
+        return str(self.title) if self.title else str(self.id)
+    
