@@ -275,6 +275,32 @@ class EventsViewset(APIView):
             return Response(serializer.data)
         except Exception as e:
             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class EventFaqViewset(APIView):
+    serializer_class = core_serializer.EventFaqSerializer 
+
+    def get(self, request):
+        try:
+            data = core_models.EventFaq.objects.filter(is_deleted=False)
+            serializer = self.serializer_class(data, many=True, context={"request": request})
+            return Response(serializer.data)
+            
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class SpecializationViewset(APIView):
+    serializer_class = core_serializer.SpecializationSerializer
+
+    def get(self, request):
+        try:
+            data = core_models.Specialization.objects.filter(is_deleted=False)
+            serializer = self.serializer_class(data, many=True, context={"request": request})
+            return Response(serializer.data)
+            
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+ 
+
                 
 #careers
 class CareersViewset(APIView):
@@ -530,3 +556,15 @@ class CostOfStudyView(APIView):
             return Response(serializer.data)
         except Exception as e:
             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class DestinationSpecializationView(APIView):
+    serializer_class = destination_serializer.DestinationSpecializationSerializer
+
+    def get(self, request):
+        try:
+            data = destination_models.DestinationSpecialization.objects.filter(is_deleted=False)
+            serializer = self.serializer_class(data, many=True, context={"request": request})
+            return Response(serializer.data)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        

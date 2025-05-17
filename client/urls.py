@@ -16,13 +16,15 @@ urlpatterns = [
     path('countries/', views.CountryViewset.as_view(), name='countries-list'),
     path('study-level/', views.StudyLevelViewset.as_view(), name='study-level-list'),
     path('events/', views.EventsViewset.as_view(), name='events-list'),
+    path('event-faq/', views.EventFaqViewset.as_view(), name='event-faq-list'),
     
-
+    
+    # Career URLs
     path('perks/', views.PerksView.as_view(), name='perks'),
     path('careers/', views.CareersViewset.as_view(), name='careers-list'),
     path('job-application/', views.JobApplicationPostAPIView.as_view(), name='job-application'),
 
-
+    #Destination URLs
     path('destinations/', views.DestinationsView.as_view(), name='destinations'),
     path('destination-banner/', views.DestinationBannerView.as_view(), name='destination_banner'),
     path('destination-why-choose/', views.DestinationWhyChooseView.as_view(), name='destination_why_choose'),
@@ -30,18 +32,18 @@ urlpatterns = [
     path('life-as-student/', views.LifeAsStudentView.as_view(), name='life_as_student'),
     path('destination-faqs/', views.DestinationFaqView.as_view(), name='destination_faqs'),
 
-    # Visa URLs
+    # destinationVisa URLs
     path('visa-banner/', views.VisaBannerView.as_view(), name='visa_banner'),
     path('visa-documents/', views.VisaDocumentsView.as_view(), name='visa_documents'),
     path('visa-cards/', views.VisaCardsView.as_view(), name='visa_cards'),
     path('visa-your-obligations/', views.VisaYourObligationsView.as_view(), name='visa_your_obligations'),
 
-    # Scholarship URLs
+    # destinationScholarship URLs
     path('scholarship-banner/', views.ScholarshipBannerView.as_view(), name='scholarship_banner'),
     path('scholarship-cards/', views.ScholarshipCardsView.as_view(), name='scholarship_cards'),
     path('scholarships/', views.ScholarshipsView.as_view(), name='scholarships'),
 
-    # Cost of Study
+    # destinationCost of Study
     path('cost-of-study/', views.CostOfStudyView.as_view(), name='cost_of_study'),
     
      

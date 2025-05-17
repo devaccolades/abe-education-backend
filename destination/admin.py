@@ -100,3 +100,9 @@ class CostOfStudyAdmin(ModelAdmin):
     list_display = ('page_title', 'tuition_bachelor', 'tuition_postgrad', 'tuition_doctoral', 'visa_fee', 'date_added', 'date_updated', 'is_deleted')
     search_fields = ('page_title', 'tuition_bachelor', 'tuition_postgrad')
     list_filter = ('date_added', 'is_deleted')
+
+@admin.register(DestinationSpecialization)
+class DestinationSpecializationAdmin(ModelAdmin):
+    list_display = ('destination', 'courses', 'date_added', 'date_updated', 'is_deleted')
+    search_fields = ('destination', 'courses',)
+    list_filter = ('date_added', 'is_deleted')
