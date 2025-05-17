@@ -83,3 +83,15 @@ class EventsAdmin(ModelAdmin):
     list_display = ('title', 'start_date', 'end_date', 'location', 'date_added', 'date_updated', 'is_deleted')
     search_fields = ('title', 'description', 'location')
     list_filter = ('date_added', 'is_deleted')
+
+@admin.register(EventFaq)
+class EventFaqAdmin(ModelAdmin):
+    search_fields = ('question',)
+    list_filter = ('date_added', 'is_deleted')
+
+@admin.register(Specialization)
+class SpecializationAdmin(ModelAdmin):
+    list_display = ('specialization_area', 'date_added', 'date_updated', 'is_deleted')
+    search_fields = ('specialization_area',)
+    list_filter = ('date_added', 'is_deleted')
+   

@@ -283,3 +283,31 @@ class Events(BaseModel):
     def __str__(self):
         return str(self.title) if self.title else str(self.id)
     
+
+class EventFaq(BaseModel):
+    question = models.CharField(max_length=300)
+    answer = models.TextField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'core.event_faq'
+        verbose_name = 'Event Faq'
+        verbose_name_plural = 'Event FAQ'
+        ordering = ('-date_added',)
+
+
+    def __str__(self):
+        return self.question
+    
+class Specialization(BaseModel):
+    specialization_area = models.CharField(max_length=255, blank=True, null=True)
+    specialization_image = models.FileField(upload_to='specialization/images', blank=True, null=True)
+    specialization_image_alt = models.CharField(max_length=125, null=True, blank=True)
+
+    class Meta:
+        db_table = 'core.specialization'
+        verbose_name = 'Specialization'
+        verbose_name_plural = 'Specializations'
+        ordering = ('-date_added',)
+
+    def __str__(self):
+        return str(self.specialization) if self.specialization else str(self.id)

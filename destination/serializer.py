@@ -83,3 +83,8 @@ class CostOfStudySerializer(serializers.ModelSerializer):
     class Meta:
         model = CostOfStudy
         fields = '__all__'
+
+class DestinationSpecializationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DestinationSpecialization
+        fields = '__all__'

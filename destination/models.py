@@ -312,6 +312,45 @@ class CostOfStudy(BaseModel):
     
 
 
+#specialization page
+
+COURSE_CHOICES = (
+    ('Diploma', 'Diploma'),
+    ('Undergraduate', 'Undergraduate'),
+    ('Postgraduate', 'Postgraduate'),
+)
+
+class DestinationSpecialization(BaseModel):
+    destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
+    courses = models.CharField(choices=COURSE_CHOICES, max_length=255, null=True, blank=True)
+    description = models.TextField( null=True, blank=True)
+    banner_image = models.FileField(upload_to='specialization', blank=True, null=True)
+    banner_image_alt = models.CharField(max_length=100, null=True, blank=True)
+    specialization_areas = models.ManyToManyField(Specialization, blank=True)
+
+    benefits_description = models.CharField(max_length=180, null=True, blank=True)
+    benefits_image = models.FileField(upload_to='specialization', blank=True, null=True)
+    benefits_image_alt = models.CharField(max_length=100, null=True, blank=True)
+    benefit_1 = models.CharField(max_length=200, null=True, blank=True)
+    benefit_2 = models.CharField(max_length=200, null=True, blank=True)
+    benefit_3 = models.CharField(max_length=200, null=True, blank=True)
+    benefit_4 = models.CharField(max_length=200, null=True, blank=True)
+    benefit_5 = models.CharField(max_length=200, null=True, blank=True)
+    benefit_6 = models.CharField(max_length=200, null=True, blank=True)
+    benefit_7 = models.CharField(max_length=200, null=True, blank=True)
+    benefit_8 = models.CharField(max_length=200, null=True, blank=True)
+    benefit_9 = models.CharField(max_length=200, null=True, blank=True)
+    benefit_10 = models.CharField(max_length=200, null=True, blank=True)
+    
+
+    class Meta:
+        db_table = 'destination.destination_specialization'
+        verbose_name = 'Destination Specialization'
+        verbose_name_plural = 'o. Destination Specialization'
+        ordering = ('-date_added',)
+
+    def __str__(self):
+        return f"Destination Specialization {self.id}"
     
 
     
