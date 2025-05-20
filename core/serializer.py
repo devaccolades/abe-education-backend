@@ -37,7 +37,7 @@ class BranchDetailsSerializer(serializers.ModelSerializer):
 class HomeCardsSerializer(serializers.ModelSerializer):
     class Meta:
         model = HomeCards
-        fields = ['id', 'title', 'subtitle', 'description', 'image', 'image_alt']
+        fields = '__all__'
 
 class FooterDescriptionSerializer(serializers.ModelSerializer):
     class Meta:
