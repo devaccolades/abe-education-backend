@@ -31,27 +31,24 @@ SECRET_KEY = 'django-insecure-@u&j=s86+vps5+dd+ml#5+ldv7bb18#3z4x8ok(j=lx%$td$tz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['194.164.150.240','admin.abeedu.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'unfold',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'core',
     'leads',
     'career',
     'destination',
-    'training',
-    
     'ckeditor',
     'rest_framework',
     'django_filters',
@@ -151,6 +148,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://admin.abeedu.com",
+]
 
 
 MEDIA_URL = '/media/'
