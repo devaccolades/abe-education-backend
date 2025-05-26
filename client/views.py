@@ -19,10 +19,13 @@ from destination import models as destination_models
 from destination import serializer as destination_serializer
 
 from leads import models as leads_models
-# from leads import serializer as leads_serializer
+from leads import serializer as leads_serializer
 
 from career import models as careers_models
 from career import serializer as careers_serializer
+
+from training import models as training_models
+from training import serializer as training_serializer
 
 
 
@@ -568,3 +571,327 @@ class DestinationSpecializationView(APIView):
         except Exception as e:
             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
+
+
+#leads
+class EventRegistrationPostAPIView(APIView):
+    def post(self, request):
+        try:
+            serializer = leads_serializer.EventRegistrationFormSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+
+                context = {
+                    'name': serializer.data['name'],
+                    'email': serializer.data['email'],
+                    'phone': serializer.data['phone'],
+                    'nearest_office': serializer.data['nearest_office'],
+                    'event': serializer.data['event'],
+                    'date_added': serializer.data['date_added']
+                }
+                template = get_template('EventRegistration.html').render(context)
+                e = settings.EMAIL_HOST_USER
+                send_mail(
+                    'New Event Registration on abe-education',
+                    None,
+                    e,
+                    ["manjima.accolades@gmail.com"],  # Change this to the admin's email
+                    fail_silently=False,
+                    html_message=template,
+                )
+                response_data = {
+                    "StatusCode": 6001,
+                    "detail": "success",
+                    "data": serializer.data,
+                    "message": "Registration successfully"
+                }
+            else:
+                response_data = {
+                    "StatusCode": 6002,
+                    "detail": "validation error",
+                    "data": serializer.errors,
+                    "message": ""
+                }
+        except Exception as e:
+            response_data = {
+                "StatusCode": 6002,
+                "detail": "error",
+                "data": "",
+                "message": f'Something went wrong: {e}'
+            }
+        return Response(response_data, status=status.HTTP_200_OK)
+    
+
+class GetExpertAdvicePostAPIView(APIView):
+    def post(self, request):
+        try:
+            serializer = leads_serializer.GetExpertAdviceFormSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                context = serializer.data
+                template = get_template('GetExpertAdvice.html').render(context)
+                send_mail(
+                    'New Get Expert Advice Submission on abe-education',
+                    None,
+                    settings.EMAIL_HOST_USER,
+                    ["manjima.accolades@gmail.com"],
+                    fail_silently=False,
+                    html_message=template,
+                )
+                response_data = {
+                    "StatusCode": 6001,
+                    "detail": "success",
+                    "data": serializer.data,
+                    "message": "Submitted successfully"
+                }
+            else:
+                response_data = {
+                    "StatusCode": 6002,
+                    "detail": "validation error",
+                    "data": serializer.errors,
+                    "message": ""
+                }
+        except Exception as e:
+            response_data = {
+                "StatusCode": 6002,
+                "detail": "error",
+                "data": "",
+                "message": f'Something went wrong: {e}'
+            }
+        return Response(response_data, status=status.HTTP_200_OK)
+
+
+class FreeConsultationPostAPIView(APIView):
+    def post(self, request):
+        try:
+            serializer = leads_serializer.FreeConsultationFormSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                context = serializer.data
+                template = get_template('FreeConsultation.html').render(context)
+                send_mail(
+                    'New Free Consultation Submission on abe-education',
+                    None,
+                    settings.EMAIL_HOST_USER,
+                    ["manjima.accolades@gmail.com"],
+                    fail_silently=False,
+                    html_message=template,
+                )
+                response_data = {
+                    "StatusCode": 6001,
+                    "detail": "success",
+                    "data": serializer.data,
+                    "message": "Submitted successfully"
+                }
+            else:
+                response_data = {
+                    "StatusCode": 6002,
+                    "detail": "validation error",
+                    "data": serializer.errors,
+                    "message": ""
+                }
+        except Exception as e:
+            response_data = {
+                "StatusCode": 6002,
+                "detail": "error",
+                "data": "",
+                "message": f'Something went wrong: {e}'
+            }
+        return Response(response_data, status=status.HTTP_200_OK)
+
+
+class SpecializationEnquiryPostAPIView(APIView):
+    def post(self, request):
+        try:
+            serializer = leads_serializer.SpecializationEnquiryFormSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                context = serializer.data
+                template = get_template('SpecializationEnquiry.html').render(context)
+                send_mail(
+                    'New Specialization Enquiry Submission on abe-education',
+                    None,
+                    settings.EMAIL_HOST_USER,
+                    ["manjima.accolades@gmail.com"],
+                    fail_silently=False,
+                    html_message=template,
+                )
+                response_data = {
+                    "StatusCode": 6001,
+                    "detail": "success",
+                    "data": serializer.data,
+                    "message": "Submitted successfully"
+                }
+            else:
+                response_data = {
+                    "StatusCode": 6002,
+                    "detail": "validation error",
+                    "data": serializer.errors,
+                    "message": ""
+                }
+        except Exception as e:
+            response_data = {
+                "StatusCode": 6002,
+                "detail": "error",
+                "data": "",
+                "message": f'Something went wrong: {e}'
+            }
+        return Response(response_data, status=status.HTTP_200_OK)
+
+
+class UniversityEnquiryPostAPIView(APIView):
+    def post(self, request):
+        try:
+            serializer = leads_serializer.UniversityEnquiryFormSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                context = serializer.data
+                template = get_template('UniversityEnquiry.html').render(context)
+                send_mail(
+                    'New University Enquiry Submission on abe-education',
+                    None,
+                    settings.EMAIL_HOST_USER,
+                    ["manjima.accolades@gmail.com"],
+                    fail_silently=False,
+                    html_message=template,
+                )
+                response_data = {
+                    "StatusCode": 6001,
+                    "detail": "success",
+                    "data": serializer.data,
+                    "message": "Submitted successfully"
+                }
+            else:
+                response_data = {
+                    "StatusCode": 6002,
+                    "detail": "validation error",
+                    "data": serializer.errors,
+                    "message": ""
+                }
+        except Exception as e:
+            response_data = {
+                "StatusCode": 6002,
+                "detail": "error",
+                "data": "",
+                "message": f'Something went wrong: {e}'
+            }
+        return Response(response_data, status=status.HTTP_200_OK)
+
+
+class EnrolForTrainingPostAPIView(APIView):
+    def post(self, request):
+        try:
+            serializer = leads_serializer.EnrolForTrainingFormSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                context = serializer.data
+                template = get_template('EnrolForTraining.html').render(context)
+                send_mail(
+                    'New Enrolment for Training on abe-education',
+                    None,
+                    settings.EMAIL_HOST_USER,
+                    ["manjima.accolades@gmail.com"],
+                    fail_silently=False,
+                    html_message=template,
+                )
+                response_data = {
+                    "StatusCode": 6001,
+                    "detail": "success",
+                    "data": serializer.data,
+                    "message": "Submitted successfully"
+                }
+            else:
+                response_data = {
+                    "StatusCode": 6002,
+                    "detail": "validation error",
+                    "data": serializer.errors,
+                    "message": ""
+                }
+        except Exception as e:
+            response_data = {
+                "StatusCode": 6002,
+                "detail": "error",
+                "data": "",
+                "message": f'Something went wrong: {e}'
+            }
+        return Response(response_data, status=status.HTTP_200_OK)
+
+
+class TrainingContactPostAPIView(APIView):
+    def post(self, request):
+        try:
+            serializer = leads_serializer.TrainingContactFormSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                context = serializer.data
+                template = get_template('TrainingContact.html').render(context)
+                send_mail(
+                    'New Training Contact Submission on abe-education',
+                    None,
+                    settings.EMAIL_HOST_USER,
+                    ["manjima.accolades@gmail.com"],
+                    fail_silently=False,
+                    html_message=template,
+                )
+                response_data = {
+                    "StatusCode": 6001,
+                    "detail": "success",
+                    "data": serializer.data,
+                    "message": "Submitted successfully"
+                }
+            else:
+                response_data = {
+                    "StatusCode": 6002,
+                    "detail": "validation error",
+                    "data": serializer.errors,
+                    "message": ""
+                }
+        except Exception as e:
+            response_data = {
+                "StatusCode": 6002,
+                "detail": "error",
+                "data": "",
+                "message": f'Something went wrong: {e}'
+            }
+        return Response(response_data, status=status.HTTP_200_OK)
+
+
+
+# Training       
+class TrainingEvaluationViewset(APIView):
+    serializer_class = training_serializer.TrainingEvaluationSerializer
+
+    def get(self, request):
+        try:
+            data = training_models.TrainingEvaluation.objects.filter(is_deleted=False)
+            serializer = self.serializer_class(data, many=True, context={"request": request})
+            return Response(serializer.data)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
+
+
+class ExamCentresViewset(APIView):
+    serializer_class = training_serializer.ExamCentresSerializer
+
+    def get(self, request):
+        try:
+            data = training_models.ExamCentres.objects.filter(is_deleted=False)
+            serializer = self.serializer_class(data, many=True, context={"request": request})
+            return Response(serializer.data)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class SetExamCentreViewset(APIView):
+    serializer_class = training_serializer.SetExamCentreSerializer
+
+    def get(self, request):
+        try:
+            data = training_models.SetExamCentre.objects.filter(is_deleted=False)
+            serializer = self.serializer_class(data, many=True, context={"request": request})
+            return Response(serializer.data)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)

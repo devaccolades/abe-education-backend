@@ -32,20 +32,33 @@ urlpatterns = [
     path('life-as-student/', views.LifeAsStudentView.as_view(), name='life_as_student'),
     path('destination-faqs/', views.DestinationFaqView.as_view(), name='destination_faqs'),
 
-    # destinationVisa URLs
+    # #destinationVisa URLs
     path('visa-banner/', views.VisaBannerView.as_view(), name='visa_banner'),
     path('visa-documents/', views.VisaDocumentsView.as_view(), name='visa_documents'),
     path('visa-cards/', views.VisaCardsView.as_view(), name='visa_cards'),
     path('visa-your-obligations/', views.VisaYourObligationsView.as_view(), name='visa_your_obligations'),
 
-    # destinationScholarship URLs
+    # #destinationScholarship URLs
     path('scholarship-banner/', views.ScholarshipBannerView.as_view(), name='scholarship_banner'),
     path('scholarship-cards/', views.ScholarshipCardsView.as_view(), name='scholarship_cards'),
     path('scholarships/', views.ScholarshipsView.as_view(), name='scholarships'),
 
-    # destinationCost of Study
+    # #destinationCost of Study
     path('cost-of-study/', views.CostOfStudyView.as_view(), name='cost_of_study'),
     
-     
+    #Leads URLs
+    path('event-registration/', views.EventRegistrationPostAPIView.as_view(), name='event_registration'), 
+    path('get-expert-advice/', views.GetExpertAdvicePostAPIView.as_view(), name='get_expert_advice'),
+    path('free-consultation/', views.FreeConsultationPostAPIView.as_view(), name='free_consultation'),
+    path('specialization-enquiry/', views.SpecializationEnquiryPostAPIView.as_view(), name='specialization_enquiry'),
+    path('university-enquiry/', views.UniversityEnquiryPostAPIView.as_view(), name='university_enquiry'),
+    path('enrol-for-training/', views.EnrolForTrainingPostAPIView.as_view(), name='enrol_for_training'),
+    path('training-contact/', views.TrainingContactPostAPIView.as_view(), name='training_contact'),
+
+    #Training URLs
+    path('training-evaluation/', views.TrainingEvaluationViewset.as_view(), name='training-evaluation'),
+    path('exam-centres/', views.ExamCentresViewset.as_view(), name='exam-centres'),
+    path('set-exam-centre/', views.SetExamCentreViewset.as_view(), name='set-exam-centre'),
+
 
 ]

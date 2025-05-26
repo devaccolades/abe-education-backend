@@ -1,0 +1,91 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;1,100&display=swap"
+    rel="stylesheet" />
+  <style type="text/css">
+    @media screen and (max-width: 600px) {
+      .webkit { max-width: 400px !important; }
+      .details { padding: 20px !important; }
+      .outer { padding: 50px 0 !important; }
+    }
+
+    @media screen and (max-width: 500px) {
+      .logo { width: 100px !important; }
+      .details { padding: 15px !important; }
+      .webkit { max-width: 300px !important; }
+      .outer { padding: 40px 0 !important; }
+      .content { width: 80% !important; }
+      h4 { font-size: 20px !important; }
+    }
+  </style>
+</head>
+
+<body style="margin: 0; padding: 0; background-color: #fff; font-family: 'Roboto', sans-serif;">
+  <center class="wrapper" style="width: 100%; table-layout: fixed; background-color: #fff; padding: 40px 0;">
+    <div class="webkit" style="max-width: 500px; background-color: #fff; border: 1px solid #E6E6E6; border-radius: 16px;
+      background-image: url('https://s3.ap-south-1.amazonaws.com/talrop.com-react-assets-bucket/assets/images/06-07-2021/bg.png');
+      background-repeat: no-repeat; background-size: contain;">
+      <table class="outer" style="width: 100%; border-spacing: 0; text-align: center; padding: 80px 0;">
+        <tr>
+          <td class="main">
+            <table class="content" style="width: 100%; text-align: center; margin: 0 auto;">
+              <tr>
+                <td>
+                  <h3 style="font-weight: 600; font-size: 24px; color: #373737; margin: 30px 0 15px;">
+                    Specialization Enquiry Details
+                  </h3>
+                </td>
+              </tr>
+            </table>
+            <table class="content-details" style="width: 100%; text-align: center; margin: 0 auto;">
+              <tr>
+                <td>
+                  <table class="details" style="margin: 0 auto; text-align: left; background: #F4F5F7; padding: 25px;
+                    width: 90%; border-radius: 5px;">
+                    <tr>
+                      <td><p style="color: #565656"><b>Name :</b></p></td>
+                      <td><span style="color: #373737; font-weight: 600;">{{ name }}</span></td>
+                    </tr>
+                    <tr>
+                      <td><p style="color: #565656"><b>Email :</b></p></td>
+                      <td><span style="color: #373737; font-weight: 600;"><a href="mailto:{{ email }}">{{ email }}</a></span></td>
+                    </tr>
+                    <tr>
+                      <td><p style="color: #565656"><b>Phone :</b></p></td>
+                      <td><span style="color: #373737; font-weight: 600;">{{ phone }}</span></td>
+                    </tr>
+                    <tr>
+                      <td><p style="color: #565656"><b>Course :</b></p></td>
+                      <td><span style="color: #373737; font-weight: 600;">{{ course }}</span></td>
+                    </tr>
+                    <tr>
+                      <td><p style="color: #565656"><b>Specialization :</b></p></td>
+                      <td><span style="color: #373737; font-weight: 600;">{{ specialization }}</span></td>
+                    </tr>
+                    <tr>
+                      <td><p style="color: #565656"><b>Destination :</b></p></td>
+                      <td><span style="color: #373737; font-weight: 600;">{{ destination }}</span></td>
+                    </tr>
+                    <tr>
+                      <td><p style="color: #565656"><b>Date Added :</b></p></td>
+                      <td><span style="color: #373737; font-weight: 600;">{{ date_added }}</span></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </center>
+</body>
+
+</html>

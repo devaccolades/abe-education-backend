@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'leads',
     'career',
     'destination',
+    'training',
     
     'ckeditor',
     'rest_framework',
