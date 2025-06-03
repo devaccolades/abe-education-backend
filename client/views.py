@@ -269,15 +269,98 @@ class StudyLevelViewset(APIView):
         except Exception as e:
             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
                 
+# class EventsViewset(APIView):
+#     serializer_class = core_serializer.EventSerializer
+#     def get(self, request):
+#         try:
+#             data = core_models.Events.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 class EventsViewset(APIView):
+    """
+    API view for fetching Event and Event Details for users with pagination.
+    """
+    pagination_class = CustomPageNumberPagination
+    model = core_models.Events
     serializer_class = core_serializer.EventSerializer
-    def get(self, request):
+
+    def get(self, request, slug=None):
         try:
-            data = core_models.Events.objects.filter(is_deleted=False)
-            serializer = self.serializer_class(data, many=True, context={"request": request})
-            return Response(serializer.data)
+            if slug:
+                instance = self.get_object(slug)
+                if not instance:
+                    return Response({
+                        "StatusCode": 6002,
+                        "details": "Error",
+                        "message": "Event not found",
+                    }, status=status.HTTP_404_NOT_FOUND)
+
+                serializer = self.serializer_class(
+                    instance,
+                    context={'request': request}
+                )
+
+                related_events = self.model.objects.filter(is_deleted=False).exclude(slug=slug)[:3]
+                related_serializer = self.serializer_class(
+                    related_events,
+                    many=True,
+                    context={'request': request}
+                )
+
+                response_data = {
+                    "StatusCode": 6000,
+                    "details": "Success",
+                    "data": serializer.data,
+                    "related_events": related_serializer.data,
+                    "message": "Event details retrieved successfully"
+                }
+                return Response(response_data, status=status.HTTP_200_OK)
+
+            queryset = self.model.objects.filter(is_deleted=False)
+            paginator = self.pagination_class()
+            page = paginator.paginate_queryset(queryset, request)
+
+            serializer = self.serializer_class(
+                page,
+                many=True,
+                context={'request': request}
+            )
+
+            response_data = {
+                "StatusCode": 6000,
+                "details": "Success",
+                "data": serializer.data,
+                "pagination": {
+                    "total_items": paginator.page.paginator.count,
+                    "total_pages": paginator.page.paginator.num_pages,
+                    "current_page": paginator.page.number,
+                    "next": paginator.get_next_link(),
+                    "previous": paginator.get_previous_link()
+                },
+                "message": "Events data fetched successfully"
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+
         except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            logger.error(f"Error retrieving Events: {str(e)}")
+            return Response({
+                "StatusCode": 6002,
+                "api": request.get_full_path(),
+                "details": "Error",
+                "message": "Failed to retrieve Events",
+                "error": str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def get_object(self, slug):
+        try:
+            return self.model.objects.filter(slug=slug, is_deleted=False).first()
+        except Exception as e:
+            logger.error(f"Error retrieving event object: {str(e)}")
+            return None
+
         
 class EventFaqViewset(APIView):
     serializer_class = core_serializer.EventFaqSerializer 

@@ -16,6 +16,7 @@ urlpatterns = [
     path('countries/', views.CountryViewset.as_view(), name='countries-list'),
     path('study-level/', views.StudyLevelViewset.as_view(), name='study-level-list'),
     path('events/', views.EventsViewset.as_view(), name='events-list'),
+    path('events/<slug:slug>', views.EventsViewset.as_view(), name='get_event_by_slug'),
     path('event-faq/', views.EventFaqViewset.as_view(), name='event-faq-list'),
     
     
