@@ -63,6 +63,7 @@ BlogNews = (
     ('news', 'News'),
 )
 class Blogs(BaseModel):
+    ordering_priority = models.PositiveIntegerField(default=0, blank=True, null=True, help_text="Order of the blogs for display purposes")
     title = models.CharField(max_length=255)
     type = models.CharField(choices=BlogNews, max_length=255, blank=True, null=True)
     image = models.ImageField(upload_to='blogs')
@@ -255,6 +256,7 @@ class Country(BaseModel):
         return f"Destinations {self.id}"
     
 class Events(BaseModel):
+    ordering_priority = models.PositiveIntegerField(default=0, blank=True, null=True, help_text="Order of the event for display purposes")
     title = models.CharField(max_length=300, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     start_date = models.DateField( blank=True, null=True)

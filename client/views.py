@@ -572,6 +572,18 @@ class DestinationSpecializationView(APIView):
             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
+class PostStudyView(APIView):
+    serializer_class = destination_serializer.PostStudySerializer
+
+    def get(self, request):
+        try:
+            data = destination_models.PostStudy.objects.filter(is_deleted=False)
+            serializer = self.serializer_class(data, many=True, context={"request": request})
+            return Response(serializer.data)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+
 
 #leads
 class EventRegistrationPostAPIView(APIView):

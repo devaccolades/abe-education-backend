@@ -31,6 +31,8 @@ urlpatterns = [
     path('universities/', views.UniversityView.as_view(), name='universities'),
     path('life-as-student/', views.LifeAsStudentView.as_view(), name='life_as_student'),
     path('destination-faqs/', views.DestinationFaqView.as_view(), name='destination_faqs'),
+    path('post-study/', views.PostStudyView.as_view(), name='post-study'),
+
 
     # #destinationVisa URLs
     path('visa-banner/', views.VisaBannerView.as_view(), name='visa_banner'),
