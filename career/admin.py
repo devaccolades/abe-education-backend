@@ -22,4 +22,4 @@ class JobApplicationAdmin(ModelAdmin):
 class Perks(ModelAdmin):
     list_display = ('title', 'date_added', 'date_updated')
     search_fields = ('title' ,)
-    list_display = ('date_added', 'is_deleted')
+    list_filter = ('date_added', 'is_deleted')
