@@ -15,7 +15,7 @@ class Careers(BaseModel):
     ordering_priority = models.PositiveIntegerField(default=0, blank=True, null=True, help_text="Order of the jobs for display purposes")
     job_title = models.CharField(max_length=300, blank=True, null=True)
     type = models.CharField(choices=CAREER_TYPE_CHOICES, max_length=255, blank=True, null=True)
-    description =  RichTextField(blank=True, null=True)
+    description =  models.TextField(blank=True, null=True, help_text="Job description")
     location1 = models.CharField(max_length=255, blank=True, null=True)
     location2 = models.CharField(max_length=100, null=True, blank=True)
     location3 = models.CharField(max_length=100, null=True, blank=True)
