@@ -3,8 +3,10 @@ from .import views
 
 urlpatterns = [
     path('seo/', views.SEOViewset.as_view(), name='seo-list'),
+
     path('blogs/', views.BlogsViewset.as_view(), name='blogs-list'),
     path('blogs/<slug:slug>', views.BlogsViewset.as_view(), name='get_blog_by_slug'),
+
     path('testimonials/', views.TestimonialsViewset.as_view(), name='testimonials-list'),
     path('faq/', views.FaqViewset.as_view(), name='faq-list'),
     path('branch-details/', views.BranchDetailsViewset.as_view(), name='branch-details-list'),
@@ -15,7 +17,10 @@ urlpatterns = [
     path('bank-property-documents/', views.BankPropertyDocumentsView.as_view(), name='bank-property-documents'),
     path('countries/', views.CountryViewset.as_view(), name='countries-list'),
     path('study-level/', views.StudyLevelViewset.as_view(), name='study-level-list'),
+
     path('events/', views.EventsViewset.as_view(), name='events-list'),
+    path('events/<slug:slug>', views.EventsViewset.as_view(), name='get_event_by_slug'),
+
     path('event-faq/', views.EventFaqViewset.as_view(), name='event-faq-list'),
     
     
@@ -26,11 +31,15 @@ urlpatterns = [
 
     #Destination URLs
     path('destinations/', views.DestinationsView.as_view(), name='destinations'),
+    path('destinations/<slug:slug>', views.DestinationsView.as_view(), name='get_destinations_by_slug'),
+
     path('destination-banner/', views.DestinationBannerView.as_view(), name='destination_banner'),
     path('destination-why-choose/', views.DestinationWhyChooseView.as_view(), name='destination_why_choose'),
     path('universities/', views.UniversityView.as_view(), name='universities'),
     path('life-as-student/', views.LifeAsStudentView.as_view(), name='life_as_student'),
     path('destination-faqs/', views.DestinationFaqView.as_view(), name='destination_faqs'),
+    path('post-study/', views.PostStudyView.as_view(), name='post-study'),
+
 
     # #destinationVisa URLs
     path('visa-banner/', views.VisaBannerView.as_view(), name='visa_banner'),

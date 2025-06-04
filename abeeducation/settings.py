@@ -76,7 +76,10 @@ ROOT_URLCONF = 'abeeducation.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),  # <-- This line is key
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

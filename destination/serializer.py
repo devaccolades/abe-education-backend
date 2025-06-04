@@ -18,7 +18,11 @@ class DestinationWhyChooseSerializer(serializers.ModelSerializer):
         model = DestinationWhyChoose
         fields = '__all__'
 
-
+class PostStudySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PostStudy
+        fields = '__all__'
+        
 class UniversitySerializer(serializers.ModelSerializer):
     class Meta:
         model = University

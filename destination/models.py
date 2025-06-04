@@ -1,6 +1,7 @@
 from django.db import models
 
 from core.models import *
+
 # Create your models here.
 class Destinations(BaseModel):
     destination = models.CharField(max_length=16, null=True, blank=True)
@@ -13,7 +14,9 @@ class Destinations(BaseModel):
     meta_description = models.CharField(max_length=200, null=True, blank=True)
     specialization_image = models.FileField(upload_to='destinations', blank=True, null=True)
     specialization_image_alt = models.CharField(max_length=20, null=True, blank=True)
-    specialization_description = models.CharField(max_length=260, null=True, blank=True)
+    ug_description = models.CharField(max_length=260, null=True, blank=True)
+    pg_description = models.CharField(max_length=260, null=True, blank=True)
+    diploma_description = models.CharField(max_length=260, null=True, blank=True)
 
     class Meta:
         db_table = 'destination.destinations'
@@ -64,6 +67,24 @@ class DestinationWhyChoose(BaseModel):
     def __str__(self):
         return f"Destinations Why Choose {self.id}"
     
+class PostStudy(BaseModel):
+    destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
+    description = models.CharField(max_length=250, null=True, blank=True)
+    title_1 = models.CharField(max_length=40, null=True, blank=True)
+    description_1 = models.CharField(max_length=250, null=True, blank=True)
+    title_2 = models.CharField(max_length=40, null=True, blank=True)
+    description_2 = models.CharField(max_length=250, null=True, blank=True)
+
+    class Meta:
+        db_table = 'destination.post_study'
+        verbose_name = 'Post Study'
+        verbose_name_plural = 'd. Post Study'
+        ordering = ('-date_added',)
+
+
+    def __str__(self):
+        return f"Post Study {self.id}"
+    
 class University(BaseModel):
     destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
     university_name = models.CharField(max_length=100, null=True, blank=True)
@@ -76,7 +97,7 @@ class University(BaseModel):
     class Meta:
         db_table = 'destination.university'
         verbose_name = ' University'
-        verbose_name_plural = 'd. Universities'
+        verbose_name_plural = 'e. Universities'
         ordering = ('-date_added',)
 
 
@@ -95,7 +116,7 @@ class LifeAsStudent(BaseModel):
     class Meta:
         db_table = 'destination.life_as_student'
         verbose_name = 'Life As Student'
-        verbose_name_plural = 'e. Life As Student'
+        verbose_name_plural = 'f. Life As Student'
         ordering = ('-date_added',)
 
 
@@ -110,7 +131,7 @@ class DestinationFaq(BaseModel):
     class Meta:
         db_table = 'destination.destination_faq'
         verbose_name = 'Destination Faq'
-        verbose_name_plural = 'f. Destination Faqs'
+        verbose_name_plural = 'g. Destination Faqs'
         ordering = ('-date_added',)
 
 
@@ -130,7 +151,7 @@ class VisaBanner(BaseModel):
     class Meta:
         db_table = 'destination.visa_banner'
         verbose_name = 'Visa Banner'
-        verbose_name_plural = 'g. Visa Banner'
+        verbose_name_plural = 'h. Visa Banner'
         ordering = ('-date_added',)
 
 
@@ -155,7 +176,7 @@ class VisaDocuments(BaseModel):
     class Meta:
         db_table = 'destination.visa_documents'
         verbose_name = 'Visa Documents Required'
-        verbose_name_plural = 'h. Visa Documents Required'
+        verbose_name_plural = 'i. Visa Documents Required'
         ordering = ('-date_added',)
 
 
@@ -170,7 +191,7 @@ class VisaCards(BaseModel):
     class Meta:
         db_table = 'destination.visa_cards'
         verbose_name = 'Visa Cards'
-        verbose_name_plural = 'i. Visa Cards'
+        verbose_name_plural = 'j. Visa Cards'
         ordering = ('-date_added',)
 
 
@@ -192,7 +213,7 @@ class VisaYourObligations(BaseModel):
     class Meta:
         db_table = 'destination.visa_your_obligations'
         verbose_name = 'Visa Your Obligations'
-        verbose_name_plural = 'j. Visa Your Obligations'
+        verbose_name_plural = 'k. Visa Your Obligations'
         ordering = ('-date_added',)
 
 
@@ -208,7 +229,7 @@ class ScholarshipBanner(BaseModel):
     class Meta:
         db_table = 'destination.scholarship_banner'
         verbose_name = 'Scholarship Banner'
-        verbose_name_plural = 'k. Scholarship Banner'
+        verbose_name_plural = 'l. Scholarship Banner'
         ordering = ('-date_added',)
 
 
@@ -226,7 +247,7 @@ class ScholarshipCards(BaseModel):
     class Meta:
         db_table = 'destination.scholarship_cards'
         verbose_name = 'Scholarship Cards'
-        verbose_name_plural = 'l. Scholarship Cards'
+        verbose_name_plural = 'm. Scholarship Cards'
         ordering = ('-date_added',)
 
 
@@ -242,7 +263,7 @@ class Scholarships(BaseModel):
     class Meta:
         db_table = 'destination.scholarships'
         verbose_name = 'Scholarships'
-        verbose_name_plural = 'm. Scholarships'
+        verbose_name_plural = 'n. Scholarships'
         ordering = ('-date_added',)
 
 
@@ -303,7 +324,7 @@ class CostOfStudy(BaseModel):
     class Meta:
         db_table = 'destination.cost_of_study'
         verbose_name = 'Cost Of Study '
-        verbose_name_plural = 'n. Cost Of Study'
+        verbose_name_plural = 'o. Cost Of Study'
         ordering = ('-date_added',)
 
 
@@ -346,7 +367,7 @@ class DestinationSpecialization(BaseModel):
     class Meta:
         db_table = 'destination.destination_specialization'
         verbose_name = 'Destination Specialization'
-        verbose_name_plural = 'o. Destination Specialization'
+        verbose_name_plural = 'p. Destination Specialization'
         ordering = ('-date_added',)
 
     def __str__(self):
