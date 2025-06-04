@@ -77,7 +77,7 @@ class Blogs(BaseModel):
         db_table = 'core.blogs'
         verbose_name = 'Blog'
         verbose_name_plural = 'Blogs'
-        ordering = ('-date_added',)
+        ordering = ['ordering_priority']
 
     def __str__(self):
         return self.title if self.title else str(self.id)
@@ -280,7 +280,7 @@ class Events(BaseModel):
         db_table = 'core.events'
         verbose_name = 'Event'
         verbose_name_plural = 'Events'
-        ordering = ('-date_added',)
+        ordering = ['ordering_priority']
 
     def __str__(self):
         return str(self.title) if self.title else str(self.id)
