@@ -312,4 +312,4 @@ class Specialization(BaseModel):
         ordering = ('-date_added',)
 
     def __str__(self):
-        return str(self.specialization) if self.specialization else str(self.id)
+        return str(self.specialization_area) if self.specialization_area else str(self.id)
