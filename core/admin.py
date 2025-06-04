@@ -6,8 +6,8 @@ from unfold.admin import ModelAdmin
 
 @admin.register(Blogs)
 class BlogsAdmin(ModelAdmin):
-    list_display = ('title', 'slug', 'date_added', 'date_updated', 'is_deleted')
-    search_fields = ('title', 'slug', 'description')
+    list_display = ('ordering_priority', 'title', 'slug', 'date_added', 'date_updated', 'is_deleted')
+    search_fields = ('ordering_priority', 'title', 'slug', 'description')
     list_filter = ('date_added', 'is_deleted')
     prepopulated_fields = {'slug': ('title',)}
 
@@ -80,8 +80,8 @@ class StudyLevelAdmin(ModelAdmin):
 
 @admin.register(Events)
 class EventsAdmin(ModelAdmin):
-    list_display = ('title', 'start_date', 'end_date', 'location', 'date_added', 'date_updated', 'is_deleted')
-    search_fields = ('title', 'description', 'location')
+    list_display = ('ordering_priority', 'title', 'start_date', 'end_date', 'location', 'date_added', 'date_updated', 'is_deleted')
+    search_fields = ('ordering_priority', 'title', 'description', 'location')
     list_filter = ('date_added', 'is_deleted')
     prepopulated_fields = {'slug': ('title',)}
 

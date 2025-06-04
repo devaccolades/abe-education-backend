@@ -25,7 +25,7 @@ class Careers(BaseModel):
         db_table='career.careers'
         verbose_name = ('Careers')
         verbose_name_plural = ('Careers')
-        ordering = ('-date_added',)
+        ordering = ['ordering_priority']
 
     def __str__(self):
         return self.job_title if self.job_title else str(self.id)

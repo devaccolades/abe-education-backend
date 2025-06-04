@@ -7,8 +7,8 @@ from unfold.admin import ModelAdmin
 # Register your models here.
 @admin.register(Careers)
 class CareersAdmin(ModelAdmin):
-    list_display = ('job_title', 'type', 'location1', 'date_added', 'date_updated', 'is_deleted')
-    search_fields = ('job_title', 'type', 'location1')
+    list_display = ('ordering_priority', 'job_title', 'type', 'location1', 'date_added', 'date_updated', 'is_deleted')
+    search_fields = ('ordering_priority', 'job_title', 'type', 'location1')
     list_filter = ('date_added', 'is_deleted')
 
 
