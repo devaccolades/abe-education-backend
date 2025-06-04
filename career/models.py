@@ -56,6 +56,7 @@ class Perks(BaseModel):
     class Meta:
         db_table='career.perks'
         verbose_name = ('Perks')
+        
         verbose_name_plural = ('Perks')
         ordering = ('-date_added',)
 

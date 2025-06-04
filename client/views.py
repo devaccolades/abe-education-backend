@@ -476,16 +476,99 @@ class PerksView(APIView):
  
 
 #destination
+# class DestinationsView(APIView):
+#     serializer_class = destination_serializer.DestinationsSerializer
+
+#     def get(self, request):
+#         try:
+#             data = destination_models.Destinations.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 class DestinationsView(APIView):
+    """
+    API view for fetching Destinations with optional pagination and consistent response formatting.
+    """
+    pagination_class = CustomPageNumberPagination
+    model = destination_models.Destinations
     serializer_class = destination_serializer.DestinationsSerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.Destinations.objects.filter(is_deleted=False)
-            serializer = self.serializer_class(data, many=True, context={"request": request})
-            return Response(serializer.data)
+            if slug:
+                instance = self.get_object(slug)
+                if not instance:
+                    return Response({
+                        "StatusCode": 6002,
+                        "details": "Error",
+                        "message": "Destination not found",
+                    }, status=status.HTTP_404_NOT_FOUND)
+
+                serializer = self.serializer_class(
+                    instance,
+                    context={"request": request}
+                )
+
+                related_destinations = self.model.objects.filter(is_deleted=False).exclude(slug=slug)[:3]
+                related_serializer = self.serializer_class(
+                    related_destinations,
+                    many=True,
+                    context={"request": request}
+                )
+
+                response_data = {
+                    "StatusCode": 6000,
+                    "details": "Success",
+                    "data": serializer.data,
+                    "related_destinations": related_serializer.data,
+                    "message": "Destination details retrieved successfully"
+                }
+                return Response(response_data, status=status.HTTP_200_OK)
+
+            queryset = self.model.objects.filter(is_deleted=False)
+            paginator = self.pagination_class()
+            page = paginator.paginate_queryset(queryset, request)
+
+            serializer = self.serializer_class(
+                page,
+                many=True,
+                context={"request": request}
+            )
+
+            response_data = {
+                "StatusCode": 6000,
+                "details": "Success",
+                "data": serializer.data,
+                "pagination": {
+                    "total_items": paginator.page.paginator.count,
+                    "total_pages": paginator.page.paginator.num_pages,
+                    "current_page": paginator.page.number,
+                    "next": paginator.get_next_link(),
+                    "previous": paginator.get_previous_link()
+                },
+                "message": "Destinations data fetched successfully"
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+
         except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            logger.error(f"Error retrieving Destinations: {str(e)}")
+            return Response({
+                "StatusCode": 6002,
+                "api": request.get_full_path(),
+                "details": "Error",
+                "message": "Failed to retrieve Destinations",
+                "error": str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def get_object(self, slug):
+        try:
+            return self.model.objects.filter(slug=slug, is_deleted=False).first()
+        except Exception as e:
+            logger.error(f"Error retrieving destination object: {str(e)}")
+            return None
+
 
 
 class DestinationBannerView(APIView):
