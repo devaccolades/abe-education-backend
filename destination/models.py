@@ -26,7 +26,7 @@ class Destinations(BaseModel):
 
 
     def __str__(self):
-        return f"Destinations {self.id}"
+        return f"Destinations {self.destination}"
     
 class DestinationBanner(BaseModel):
     destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
@@ -43,7 +43,7 @@ class DestinationBanner(BaseModel):
 
 
     def __str__(self):
-        return f"Destination banner {self.id}"
+        return f"Destination banner {self.title}"
     
 class DestinationWhyChoose(BaseModel):
     destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
@@ -65,7 +65,7 @@ class DestinationWhyChoose(BaseModel):
 
 
     def __str__(self):
-        return f"Destinations Why Choose {self.id}"
+        return f"Destinations Why Choose {self.destination}"
     
 class PostStudy(BaseModel):
     destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
@@ -83,7 +83,7 @@ class PostStudy(BaseModel):
 
 
     def __str__(self):
-        return f"Post Study {self.id}"
+        return f"Post Study {self.destination}"
     
 class University(BaseModel):
     destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
@@ -102,7 +102,7 @@ class University(BaseModel):
 
 
     def __str__(self):
-        return f"Universities {self.id}" 
+        return f"Universities {self.university_name}" 
     
     
 class LifeAsStudent(BaseModel):
@@ -121,7 +121,7 @@ class LifeAsStudent(BaseModel):
 
 
     def __str__(self):
-        return f"Life As Student {self.id}" 
+        return f"Life As Student {self.title}" 
     
 class DestinationFaq(BaseModel):
     destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
@@ -156,7 +156,7 @@ class VisaBanner(BaseModel):
 
 
     def __str__(self):
-        return f"Visa Banner {self.id}"
+        return f"Visa Banner {self.destination}"
     
 class VisaDocuments(BaseModel):
     destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
@@ -181,7 +181,7 @@ class VisaDocuments(BaseModel):
 
 
     def __str__(self):
-        return f"Visa Documents Required {self.id}"
+        return f"Visa Documents Required {self.destination}"
     
 class VisaCards(BaseModel):
     destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
@@ -196,7 +196,7 @@ class VisaCards(BaseModel):
 
 
     def __str__(self):
-        return f"Visa Cards {self.id}"
+        return f"Visa Cards {self.title}"
     
 class VisaYourObligations(BaseModel):
     destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
@@ -218,7 +218,7 @@ class VisaYourObligations(BaseModel):
 
 
     def __str__(self):
-        return f"Visa Your Obligations {self.id}"
+        return f"Visa Your Obligations {self.destination}"
 
 
 #scholarship page
@@ -234,7 +234,7 @@ class ScholarshipBanner(BaseModel):
 
 
     def __str__(self):
-        return f"Scholarship Banner {self.id}" 
+        return f"Scholarship Banner {self.destination}" 
     
 
 class ScholarshipCards(BaseModel):
@@ -252,7 +252,7 @@ class ScholarshipCards(BaseModel):
 
 
     def __str__(self):
-        return f"Scholarship Cards {self.id}"    
+        return f"Scholarship Cards {self.title}"    
     
 class Scholarships(BaseModel):
     destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
@@ -268,7 +268,7 @@ class Scholarships(BaseModel):
 
 
     def __str__(self):
-        return f"Scholarships {self.id}"
+        return f"Scholarships {self.title}"
 
 
 class CostOfStudy(BaseModel):
@@ -371,7 +371,7 @@ class DestinationSpecialization(BaseModel):
         ordering = ('-date_added',)
 
     def __str__(self):
-        return f"Destination Specialization {self.id}"
+        return f"Destination Specialization {self.destination} - {self.courses}"
     
 
     
