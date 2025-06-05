@@ -17,6 +17,7 @@ class Destinations(BaseModel):
     ug_description = models.CharField(max_length=260, null=True, blank=True)
     pg_description = models.CharField(max_length=260, null=True, blank=True)
     diploma_description = models.CharField(max_length=260, null=True, blank=True)
+    slug = models.SlugField(max_length=200, default='destination', null=True, blank=True)
 
     class Meta:
         db_table = 'destination.destinations'
