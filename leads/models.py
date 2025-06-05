@@ -25,7 +25,7 @@ class GetExpertAdviceForm(BaseModel):
     name = models.CharField(max_length=255, null=True, blank=True)
     email = models.EmailField(max_length=255, null=True, blank=True)
     phone = models.CharField(max_length=18, blank=True, null=True)
-    preferred_intake = models.CharField(max_length=100, null=True, blank=True)
+    preferred_country = models.CharField(max_length=100, null=True, blank=True)
     preferred_course = models.CharField(max_length=100, null=True, blank=True)
     nearest_office = models.CharField(max_length=100, blank=True, null=True)
 
