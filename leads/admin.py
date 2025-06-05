@@ -12,7 +12,7 @@ class EventRegistrationFormAdmin(ModelAdmin):
 
 @admin.register(GetExpertAdviceForm)
 class GetExpertAdviceFormAdmin(ModelAdmin):
-    list_display = ('name', 'email', 'phone', 'preferred_course', 'preferred_intake', 'nearest_office', 'date_added', 'date_updated', 'is_deleted')
+    list_display = ('name', 'email', 'phone', 'preferred_course', 'preferred_country', 'nearest_office', 'date_added', 'date_updated', 'is_deleted')
     search_fields = ('name', 'email', 'phone', 'preferred_course')
     list_filter = ('date_added', 'is_deleted')
 
