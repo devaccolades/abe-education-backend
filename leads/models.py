@@ -39,6 +39,24 @@ class GetExpertAdviceForm(BaseModel):
     def __str__(self):
         return f"Get Expert Advice by {self.name}"
     
+class GetExpertCoachingForm(BaseModel):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    email = models.EmailField(max_length=255, null=True, blank=True)
+    phone = models.CharField(max_length=18, blank=True, null=True)
+    preferred_country = models.CharField(max_length=100, null=True, blank=True)
+    preferred_time = models.CharField(max_length=100, null=True, blank=True)
+    mode_of_coaching = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        db_table = 'leads.get_expert_coaching_form'
+        verbose_name = 'Home Get Expert Coaching'
+        verbose_name_plural = 'Contact Get Expert Coaching'
+        ordering = ('-date_added',)
+
+
+    def __str__(self):
+        return f"Get Expert Coaching by {self.name}"
+    
 class FreeConsultationForm(BaseModel):
     name =  models.CharField(max_length=255, null=True, blank=True)
     email = models.EmailField(max_length=255, null=True, blank=True)

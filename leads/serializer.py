@@ -38,3 +38,8 @@ class TrainingContactFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrainingContactForm
         fields = '__all__'
+
+class GetExpertCoachingFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GetExpertCoachingForm
+        fields = '__all__'

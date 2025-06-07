@@ -45,3 +45,9 @@ class TrainingContactFormAdmin(ModelAdmin):
     list_display = ('name', 'email', 'phone', 'preferred_centre', 'training_type', 'date_added', 'date_updated', 'is_deleted')
     search_fields = ('name', 'email', 'phone', 'preferred_centre')
     list_filter = ('date_added', 'is_deleted')
+
+@admin.register(GetExpertCoachingForm)
+class GetExpertCoachingFormAdmin(ModelAdmin):
+    list_display = ('name', 'email', 'phone', 'preferred_country', 'preferred_time', 'mode_of_coaching', 'date_added', 'date_updated', 'is_deleted')
+    search_fields = ('name', 'email', 'phone', 'preferred_country')
+    list_filter = ('date_added', 'is_deleted')
