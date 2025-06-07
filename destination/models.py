@@ -117,27 +117,28 @@ class University(BaseModel):
     
 class LifeAsStudent(BaseModel):
     destination = models.OneToOneField(Destinations, on_delete=models.CASCADE, null=True, blank=True)
+    main_description = models.CharField(max_length=250, null=True, blank=True)
 
     card_title_1 = models.CharField(max_length=40, null=True, blank=True)
-    description_1 = models.CharField(max_length=250, null=True, blank=True)
+    card_content_1 = models.CharField(max_length=250, null=True, blank=True)
     card_image_1 = models.FileField(upload_to='life_as', blank=True, null=True)
     image_alt_1 = models.CharField(max_length=100, null=True, blank=True)
 
     card_title_2 = models.CharField(max_length=40, null=True, blank=True)
-    description_2 = models.CharField(max_length=250, null=True, blank=True)
+    card_content_2 = models.CharField(max_length=250, null=True, blank=True)
     card_image_2 = models.FileField(upload_to='life_as', blank=True, null=True)
     image_alt_2 = models.CharField(max_length=100, null=True, blank=True)
 
     card_title_3 = models.CharField(max_length=40, null=True, blank=True)
-    description_3 = models.CharField(max_length=250, null=True, blank=True)
+    card_content_3 = models.CharField(max_length=250, null=True, blank=True)
     card_image_3 = models.FileField(upload_to='life_as', blank=True, null=True)
     image_alt_3 = models.CharField(max_length=100, null=True, blank=True)
 
     post_study_description = models.CharField(max_length=250, null=True, blank=True)
-    title_1 = models.CharField(max_length=40, null=True, blank=True)
-    description_1 = models.CharField(max_length=250, null=True, blank=True)
-    title_2 = models.CharField(max_length=40, null=True, blank=True)
-    description_2 = models.CharField(max_length=250, null=True, blank=True)
+    post_title_1 = models.CharField(max_length=40, null=True, blank=True)
+    post_description_1 = models.CharField(max_length=250, null=True, blank=True)
+    post_title_2 = models.CharField(max_length=40, null=True, blank=True)
+    post_description_2 = models.CharField(max_length=250, null=True, blank=True)
     
     class Meta:
         db_table = 'destination.life_as_student'
@@ -147,7 +148,7 @@ class LifeAsStudent(BaseModel):
 
 
     def __str__(self):
-        return f"Life As Student {self.title_1}" 
+        return f"Life As Student {self.card_title_1}" 
     
 class DestinationFaq(BaseModel):
     destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
