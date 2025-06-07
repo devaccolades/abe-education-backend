@@ -40,8 +40,8 @@ class UniversityAdmin(ModelAdmin):
 
 @admin.register(LifeAsStudent)
 class LifeAsStudentAdmin(ModelAdmin):
-    list_display = ('destination', 'title', 'image_alt', 'date_added', 'date_updated', 'is_deleted')
-    search_fields = ( 'destination__destination', 'title',)
+    list_display = ('destination', 'card_title_1', 'image_alt_1', 'date_added', 'date_updated', 'is_deleted')
+    search_fields = ( 'destination__destination', 'card_title_1',)
     list_filter = ('date_added', 'is_deleted')
 
 
