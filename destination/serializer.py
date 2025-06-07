@@ -1,10 +1,13 @@
 from rest_framework import serializers
 from .models import *
 
+
 class DestinationsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Destinations
         fields = '__all__'
+
+
 
 
 class DestinationBannerSerializer(serializers.ModelSerializer):
@@ -13,15 +16,22 @@ class DestinationBannerSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class DestinationWhyChooseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DestinationWhyChoose
-        fields = '__all__'
+# class DestinationWhyChooseSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = DestinationWhyChoose
+#         fields = '__all__'
 
-class PostStudySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PostStudy
-        fields = '__all__'
+# class DestinationDetailsSerializer(serializers.ModelSerializer):
+#     banners = DestinationBannerSerializer( read_only=True)
+#     why_choose = DestinationWhyChooseSerializer( read_only=True)
+#     class Meta:
+#         model = Destinations
+#         fields = '__all__'
+
+# class PostStudySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = PostStudy
+#         fields = '__all__'
         
 class UniversitySerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,11 +56,31 @@ class VisaBannerSerializer(serializers.ModelSerializer):
         model = VisaBanner
         fields = '__all__'
 
+    def validate(self, attrs):
+        destination = attrs.get('destination') or getattr(self.instance, 'destination', None)
 
-class VisaDocumentsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = VisaDocuments
-        fields = '__all__'
+        # If destination is missing for some reason (e.g. partial update), skip check
+        if not destination:
+            return attrs
+
+        qs = VisaBanner.objects.filter(destination=destination)
+        if self.instance:
+            qs = qs.exclude(pk=self.instance.pk)
+
+        if qs.exists():
+            raise serializers.ValidationError({
+                "destination": "A VisaBanner for this destination already exists."
+            })
+
+        return attrs
+
+
+
+
+# class VisaDocumentsSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = VisaDocuments
+#         fields = '__all__'
 
 
 class VisaCardsSerializer(serializers.ModelSerializer):

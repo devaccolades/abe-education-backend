@@ -34,30 +34,53 @@ urlpatterns = [
     path('destinations/<slug:slug>', views.DestinationsView.as_view(), name='get_destinations_by_slug'),
 
     path('destination-banner/', views.DestinationBannerView.as_view(), name='destination_banner'),
-    path('destination-why-choose/', views.DestinationWhyChooseView.as_view(), name='destination_why_choose'),
+    path('destination-banner/<slug:slug>/', views.DestinationBannerView.as_view(), name='destination-banner-by-slug'),
+    # path('destination-why-choose/', views.DestinationWhyChooseView.as_view(), name='destination_why_choose'),
+
     path('universities/', views.UniversityView.as_view(), name='universities'),
+    path('universities/<slug:slug>/', views.UniversityView.as_view(), name='universities-by-destination'),
+
     path('life-as-student/', views.LifeAsStudentView.as_view(), name='life_as_student'),
+    path('life-as-student/<slug:slug>/', views.LifeAsStudentView.as_view(), name='life-as-student-by-destination'),
+
     path('destination-faqs/', views.DestinationFaqView.as_view(), name='destination_faqs'),
-    path('post-study/', views.PostStudyView.as_view(), name='post-study'),
+    path('destination-faqs/<slug:slug>/', views.DestinationFaqView.as_view(), name='destination-faqs-by-destination'),
+
+    # path('post-study/', views.PostStudyView.as_view(), name='post-study'),
 
 
     # #destinationVisa URLs
     path('visa-banner/', views.VisaBannerView.as_view(), name='visa_banner'),
-    path('visa-documents/', views.VisaDocumentsView.as_view(), name='visa_documents'),
+    path('visa-banner/<slug:slug>/', views.VisaBannerView.as_view(), name='visa_banner_by_destination'),
+
     path('visa-cards/', views.VisaCardsView.as_view(), name='visa_cards'),
-    path('visa-your-obligations/', views.VisaYourObligationsView.as_view(), name='visa_your_obligations'),
+    path('visa-cards/<slug:slug>/', views.VisaCardsView.as_view(), name='visa_cards_by_destination'),
 
-    # #destinationScholarship URLs
+    path('visa-obligations/', views.VisaYourObligationsView.as_view(), name='visa_obligations'),
+    path('visa-obligations/<slug:slug>/', views.VisaYourObligationsView.as_view(), name='visa_obligations_by_destination'),
+
+    # Scholarship section
     path('scholarship-banner/', views.ScholarshipBannerView.as_view(), name='scholarship_banner'),
-    path('scholarship-cards/', views.ScholarshipCardsView.as_view(), name='scholarship_cards'),
-    path('scholarships/', views.ScholarshipsView.as_view(), name='scholarships'),
+    path('scholarship-banner/<slug:slug>/', views.ScholarshipBannerView.as_view(), name='scholarship_banner_by_destination'),
 
-    # #destinationCost of Study
+    path('scholarship-cards/', views.ScholarshipCardsView.as_view(), name='scholarship_cards'),
+    path('scholarship-cards/<slug:slug>/', views.ScholarshipCardsView.as_view(), name='scholarship_cards_by_destination'),
+
+    path('scholarships/', views.ScholarshipsView.as_view(), name='scholarships'),
+    path('scholarships/<slug:slug>/', views.ScholarshipsView.as_view(), name='scholarships_by_destination'),
+
+    # Cost of study
     path('cost-of-study/', views.CostOfStudyView.as_view(), name='cost_of_study'),
+    path('cost-of-study/<slug:slug>/', views.CostOfStudyView.as_view(), name='cost_of_study_by_destination'),
+
+    # Destination specialization
+    path('destination-specialization/', views.DestinationSpecializationView.as_view(), name='destination_specialization'),
+    path('destination-specialization/<slug:slug>/', views.DestinationSpecializationView.as_view(), name='destination_specialization_by_destination'),
     
     #Leads URLs
     path('event-registration/', views.EventRegistrationPostAPIView.as_view(), name='event_registration'), 
     path('get-expert-advice/', views.GetExpertAdvicePostAPIView.as_view(), name='get_expert_advice'),
+    path('get-expert-coaching/', views.GetExpertCoachingPostAPIView.as_view(), name='get_expert_coaching'),
     path('free-consultation/', views.FreeConsultationPostAPIView.as_view(), name='free_consultation'),
     path('specialization-enquiry/', views.SpecializationEnquiryPostAPIView.as_view(), name='specialization_enquiry'),
     path('university-enquiry/', views.UniversityEnquiryPostAPIView.as_view(), name='university_enquiry'),

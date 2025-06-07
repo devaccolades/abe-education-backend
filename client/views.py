@@ -571,183 +571,358 @@ class DestinationsView(APIView):
 
 
 
+# class DestinationBannerView(APIView):
+#     serializer_class = destination_serializer.DestinationBannerSerializer
+
+#     def get(self, request):
+#         try:
+#             data = destination_models.DestinationBanner.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 class DestinationBannerView(APIView):
     serializer_class = destination_serializer.DestinationBannerSerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.DestinationBanner.objects.filter(is_deleted=False)
-            serializer = self.serializer_class(data, many=True, context={"request": request})
+            if slug:
+                destination = destination_models.Destinations.objects.filter(slug=slug, is_deleted=False).first()
+                if not destination:
+                    return Response({"error": "Destination not found"}, status=status.HTTP_404_NOT_FOUND)
+                
+                banners = destination_models.DestinationBanner.objects.filter(destination=destination, is_deleted=False)
+            else:
+                banners = destination_models.DestinationBanner.objects.filter(is_deleted=False)
+
+            serializer = self.serializer_class(banners, many=True, context={"request": request})
             return Response(serializer.data)
+
         except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-class DestinationWhyChooseView(APIView):
-    serializer_class = destination_serializer.DestinationWhyChooseSerializer
+# class DestinationWhyChooseView(APIView):
+#     serializer_class = destination_serializer.DestinationWhyChooseSerializer
 
-    def get(self, request):
-        try:
-            data = destination_models.DestinationWhyChoose.objects.filter(is_deleted=False)
-            serializer = self.serializer_class(data, many=True, context={"request": request})
-            return Response(serializer.data)
-        except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+#     def get(self, request):
+#         try:
+#             data = destination_models.DestinationWhyChoose.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+# class UniversityView(APIView):
+#     serializer_class = destination_serializer.UniversitySerializer
+
+#     def get(self, request):
+#         try:
+#             data = destination_models.University.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class UniversityView(APIView):
     serializer_class = destination_serializer.UniversitySerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.University.objects.filter(is_deleted=False)
+            if slug:
+                destination = destination_models.Destinations.objects.filter(slug=slug, is_deleted=False).first()
+                if not destination:
+                    return Response({"error": "Destination not found"}, status=status.HTTP_404_NOT_FOUND)
+                data = destination_models.University.objects.filter(destination=destination, is_deleted=False)
+            else:
+                data = destination_models.University.objects.filter(is_deleted=False)
+
             serializer = self.serializer_class(data, many=True, context={"request": request})
             return Response(serializer.data)
         except Exception as e:
             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+
+
+# class LifeAsStudentView(APIView):
+#     serializer_class = destination_serializer.LifeAsStudentSerializer
+
+#     def get(self, request):
+#         try:
+#             data = destination_models.LifeAsStudent.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class LifeAsStudentView(APIView):
     serializer_class = destination_serializer.LifeAsStudentSerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.LifeAsStudent.objects.filter(is_deleted=False)
+            if slug:
+                destination = destination_models.Destinations.objects.filter(slug=slug, is_deleted=False).first()
+                if not destination:
+                    return Response({"error": "Destination not found"}, status=status.HTTP_404_NOT_FOUND)
+                data = destination_models.LifeAsStudent.objects.filter(destination=destination, is_deleted=False)
+            else:
+                data = destination_models.LifeAsStudent.objects.filter(is_deleted=False)
+
             serializer = self.serializer_class(data, many=True, context={"request": request})
             return Response(serializer.data)
         except Exception as e:
             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 
 class DestinationFaqView(APIView):
     serializer_class = destination_serializer.DestinationFaqSerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.DestinationFaq.objects.filter(is_deleted=False)
+            if slug:
+                destination = destination_models.Destinations.objects.filter(slug=slug, is_deleted=False).first()
+                if not destination:
+                    return Response({"error": "Destination not found"}, status=status.HTTP_404_NOT_FOUND)
+                data = destination_models.DestinationFaq.objects.filter(destination=destination, is_deleted=False)
+            else:
+                data = destination_models.DestinationFaq.objects.filter(is_deleted=False)
+
             serializer = self.serializer_class(data, many=True, context={"request": request})
             return Response(serializer.data)
         except Exception as e:
             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+
+# class VisaBannerView(APIView):
+#     serializer_class = destination_serializer.VisaBannerSerializer
+
+#     def get(self, request):
+#         try:
+#             data = destination_models.VisaBanner.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
+
+# class VisaCardsView(APIView):
+#     serializer_class = destination_serializer.VisaCardsSerializer
+
+#     def get(self, request):
+#         try:
+#             data = destination_models.VisaCards.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+# class VisaYourObligationsView(APIView):
+#     serializer_class = destination_serializer.VisaYourObligationsSerializer
+
+#     def get(self, request):
+#         try:
+#             data = destination_models.VisaYourObligations.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+# class ScholarshipBannerView(APIView):
+#     serializer_class = destination_serializer.ScholarshipBannerSerializer
+
+#     def get(self, request):
+#         try:
+#             data = destination_models.ScholarshipBanner.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+# class ScholarshipCardsView(APIView):
+#     serializer_class = destination_serializer.ScholarshipCardsSerializer
+
+#     def get(self, request):
+#         try:
+#             data = destination_models.ScholarshipCards.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+# class ScholarshipsView(APIView):
+#     serializer_class = destination_serializer.ScholarshipsSerializer
+
+#     def get(self, request):
+#         try:
+#             data = destination_models.Scholarships.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+# class CostOfStudyView(APIView):
+#     serializer_class = destination_serializer.CostOfStudySerializer
+
+#     def get(self, request):
+#         try:
+#             data = destination_models.CostOfStudy.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+# class DestinationSpecializationView(APIView):
+#     serializer_class = destination_serializer.DestinationSpecializationSerializer
+
+#     def get(self, request):
+#         try:
+#             data = destination_models.DestinationSpecialization.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
 class VisaBannerView(APIView):
     serializer_class = destination_serializer.VisaBannerSerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.VisaBanner.objects.filter(is_deleted=False)
+            if slug:
+                data = destination_models.VisaBanner.objects.filter(
+                    is_deleted=False,
+                    destination__slug=slug
+                )
+            else:
+                data = destination_models.VisaBanner.objects.filter(is_deleted=False)
+            
             serializer = self.serializer_class(data, many=True, context={"request": request})
             return Response(serializer.data)
         except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
-class VisaDocumentsView(APIView):
-    serializer_class = destination_serializer.VisaDocumentsSerializer
-
-    def get(self, request):
-        try:
-            data = destination_models.VisaDocuments.objects.filter(is_deleted=False)
-            serializer = self.serializer_class(data, many=True, context={"request": request})
-            return Response(serializer.data)
-        except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class VisaCardsView(APIView):
     serializer_class = destination_serializer.VisaCardsSerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.VisaCards.objects.filter(is_deleted=False)
+            if slug:
+                data = destination_models.VisaCards.objects.filter(is_deleted=False, destination__slug=slug)
+            else:
+                data = destination_models.VisaCards.objects.filter(is_deleted=False)
             serializer = self.serializer_class(data, many=True, context={"request": request})
             return Response(serializer.data)
         except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class VisaYourObligationsView(APIView):
     serializer_class = destination_serializer.VisaYourObligationsSerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.VisaYourObligations.objects.filter(is_deleted=False)
+            if slug:
+                data = destination_models.VisaYourObligations.objects.filter(is_deleted=False, destination__slug=slug)
+            else:
+                data = destination_models.VisaYourObligations.objects.filter(is_deleted=False)
             serializer = self.serializer_class(data, many=True, context={"request": request})
             return Response(serializer.data)
         except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class ScholarshipBannerView(APIView):
     serializer_class = destination_serializer.ScholarshipBannerSerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.ScholarshipBanner.objects.filter(is_deleted=False)
+            if slug:
+                data = destination_models.ScholarshipBanner.objects.filter(is_deleted=False, destination__slug=slug)
+            else:
+                data = destination_models.ScholarshipBanner.objects.filter(is_deleted=False)
             serializer = self.serializer_class(data, many=True, context={"request": request})
             return Response(serializer.data)
         except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class ScholarshipCardsView(APIView):
     serializer_class = destination_serializer.ScholarshipCardsSerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.ScholarshipCards.objects.filter(is_deleted=False)
+            if slug:
+                data = destination_models.ScholarshipCards.objects.filter(is_deleted=False, destination__slug=slug)
+            else:
+                data = destination_models.ScholarshipCards.objects.filter(is_deleted=False)
             serializer = self.serializer_class(data, many=True, context={"request": request})
             return Response(serializer.data)
         except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class ScholarshipsView(APIView):
     serializer_class = destination_serializer.ScholarshipsSerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.Scholarships.objects.filter(is_deleted=False)
+            if slug:
+                data = destination_models.Scholarships.objects.filter(is_deleted=False, destination__slug=slug)
+            else:
+                data = destination_models.Scholarships.objects.filter(is_deleted=False)
             serializer = self.serializer_class(data, many=True, context={"request": request})
             return Response(serializer.data)
         except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class CostOfStudyView(APIView):
     serializer_class = destination_serializer.CostOfStudySerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.CostOfStudy.objects.filter(is_deleted=False)
+            if slug:
+                data = destination_models.CostOfStudy.objects.filter(is_deleted=False, destination__slug=slug)
+            else:
+                data = destination_models.CostOfStudy.objects.filter(is_deleted=False)
             serializer = self.serializer_class(data, many=True, context={"request": request})
             return Response(serializer.data)
         except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 class DestinationSpecializationView(APIView):
     serializer_class = destination_serializer.DestinationSpecializationSerializer
 
-    def get(self, request):
+    def get(self, request, slug=None):
         try:
-            data = destination_models.DestinationSpecialization.objects.filter(is_deleted=False)
+            if slug:
+                data = destination_models.DestinationSpecialization.objects.filter(is_deleted=False, destination__slug=slug)
+            else:
+                data = destination_models.DestinationSpecialization.objects.filter(is_deleted=False)
             serializer = self.serializer_class(data, many=True, context={"request": request})
             return Response(serializer.data)
         except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-class PostStudyView(APIView):
-    serializer_class = destination_serializer.PostStudySerializer
 
-    def get(self, request):
-        try:
-            data = destination_models.PostStudy.objects.filter(is_deleted=False)
-            serializer = self.serializer_class(data, many=True, context={"request": request})
-            return Response(serializer.data)
-        except Exception as e:
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
+
         
 
 
@@ -810,6 +985,45 @@ class GetExpertAdvicePostAPIView(APIView):
                 template = get_template('GetExpertAdvice.html').render(context)
                 send_mail(
                     'New Get Expert Advice Submission on abe-education',
+                    None,
+                    settings.EMAIL_HOST_USER,
+                    ["manjima.accolades@gmail.com"],
+                    fail_silently=False,
+                    html_message=template,
+                )
+                response_data = {
+                    "StatusCode": 6001,
+                    "detail": "success",
+                    "data": serializer.data,
+                    "message": "Submitted successfully"
+                }
+            else:
+                response_data = {
+                    "StatusCode": 6002,
+                    "detail": "validation error",
+                    "data": serializer.errors,
+                    "message": ""
+                }
+        except Exception as e:
+            response_data = {
+                "StatusCode": 6002,
+                "detail": "error",
+                "data": "",
+                "message": f'Something went wrong: {e}'
+            }
+        return Response(response_data, status=status.HTTP_200_OK)
+    
+
+class GetExpertCoachingPostAPIView(APIView):
+    def post(self, request):
+        try:
+            serializer = leads_serializer.GetExpertCoachingFormSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                context = serializer.data
+                template = get_template('GetExpertCoaching.html').render(context)
+                send_mail(
+                    'New Get Expert Coaching Submission on abe-education',
                     None,
                     settings.EMAIL_HOST_USER,
                     ["manjima.accolades@gmail.com"],
