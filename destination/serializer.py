@@ -145,7 +145,7 @@ class ScholarshipsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scholarships
         fields = [
-            'id', 'destination', 'destination_name', 'title',
+            'id', 'destination', 'destination_name', 'title', 'course',
             'university_name', 'funding_type', 'date_added',
         ]
 
