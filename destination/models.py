@@ -299,6 +299,7 @@ class ScholarshipCards(BaseModel):
 class Scholarships(BaseModel):
     destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=100, null=True, blank=True)
+    course = models.CharField(max_length=100, null=True, blank=True)
     university_name =models.CharField(max_length=100, null=True, blank=True)
     funding_type = models.CharField(max_length=100, null=True, blank=True)
 
