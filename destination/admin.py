@@ -68,8 +68,8 @@ class VisaBannerAdmin(ModelAdmin):
 
 @admin.register(VisaCards)
 class VisaCardsAdmin(ModelAdmin):
-    list_display = ('title', 'description', 'date_added', 'date_updated', 'is_deleted')
-    search_fields = ('title', 'description')
+    list_display = ('destination', 'title', 'description', 'date_added', 'date_updated', 'is_deleted')
+    search_fields = ('destination__destination', 'title', 'description')
     list_filter = ('date_added', 'is_deleted')
 
 

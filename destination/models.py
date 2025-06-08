@@ -278,11 +278,11 @@ class ScholarshipBanner(BaseModel):
 class ScholarshipCards(BaseModel):
     destination = models.OneToOneField(Destinations, on_delete=models.CASCADE, null=True, blank=True)
     title_1 = models.CharField(max_length=75, null=True, blank=True)
-    description_1 = models.CharField(max_length=280, null=True, blank=True)
+    description_1 =  models.TextField(null=True, blank=True)
     image_1 = models.FileField(upload_to='scholarship', blank=True, null=True)
     image_alt_1 = models.CharField(max_length=100, null=True, blank=True)
     title_2 = models.CharField(max_length=75, null=True, blank=True)
-    description_2 = models.CharField(max_length=280, null=True, blank=True)
+    description_2 = models.TextField(null=True, blank=True)
     image_2 = models.FileField(upload_to='scholarship', blank=True, null=True)
     image_alt_2 = models.CharField(max_length=100, null=True, blank=True)
 
