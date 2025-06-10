@@ -904,19 +904,38 @@ class CostOfStudyView(APIView):
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+# class DestinationSpecializationView(APIView):
+#     serializer_class = destination_serializer.DestinationSpecializationSerializer
+
+#     def get(self, request, slug=None):
+#         try:
+#             if slug:
+#                 data = destination_models.DestinationSpecialization.objects.filter(is_deleted=False, destination__slug=slug)
+#             else:
+#                 data = destination_models.DestinationSpecialization.objects.filter(is_deleted=False)
+#             serializer = self.serializer_class(data, many=True, context={"request": request})
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 class DestinationSpecializationView(APIView):
     serializer_class = destination_serializer.DestinationSpecializationSerializer
 
-    def get(self, request, slug=None):
+    def get(self, request, slug=None, course=None):
         try:
+            queryset = destination_models.DestinationSpecialization.objects.filter(is_deleted=False)
+
             if slug:
-                data = destination_models.DestinationSpecialization.objects.filter(is_deleted=False, destination__slug=slug)
-            else:
-                data = destination_models.DestinationSpecialization.objects.filter(is_deleted=False)
-            serializer = self.serializer_class(data, many=True, context={"request": request})
+                queryset = queryset.filter(destination__slug=slug)
+
+            if course:
+                queryset = queryset.filter(courses=course)
+
+            serializer = self.serializer_class(queryset, many=True, context={"request": request})
             return Response(serializer.data)
+
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 
 
