@@ -76,7 +76,7 @@ class Blogs(BaseModel):
     class Meta:
         db_table = 'core.blogs'
         verbose_name = 'Blog'
-        verbose_name_plural = 'Blogs'
+        verbose_name_plural = 'Blogs and News'
         ordering = ['ordering_priority']
 
     def __str__(self):
@@ -113,7 +113,7 @@ class Faq(BaseModel):
     class Meta:
         db_table = 'core.faq'
         verbose_name = 'Faq'
-        verbose_name_plural = 'Faqs'
+        verbose_name_plural = 'FAQ'
         ordering = ('-date_added',)
 
 
@@ -268,9 +268,9 @@ class Events(BaseModel):
     study_destination = models.ManyToManyField(Country, blank=True)
     study_level = models.ManyToManyField(StudyLevel, blank=True)
     about_event = RichTextField(blank=True, null=True)
-    image = models.ImageField(upload_to='events/images', blank=True, null=True)
+    image = models.FileField(upload_to='events/images', blank=True, null=True)
     image_alt = models.CharField(max_length=125, null=True, blank=True)
-    card_image = models.ImageField(upload_to='events/card_images', blank=True, null=True)
+    card_image = models.FileField(upload_to='events/card_images', blank=True, null=True)
     card_image_alt = models.CharField(max_length=125, null=True, blank=True)
     meta_title = models.CharField(max_length=300, blank=True, null=True)
     meta_description = models.TextField(blank=True, null=True)
