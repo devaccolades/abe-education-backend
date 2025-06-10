@@ -382,7 +382,7 @@ COURSE_CHOICES = (
 )
 
 class DestinationSpecialization(BaseModel):
-    destination = models.OneToOneField(Destinations, on_delete=models.CASCADE, null=True, blank=True)
+    destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, null=True, blank=True)
     courses = models.CharField(choices=COURSE_CHOICES, max_length=255, null=True, blank=True)
     description = models.TextField( null=True, blank=True)
     banner_image = models.FileField(upload_to='specialization', blank=True, null=True)
@@ -409,6 +409,7 @@ class DestinationSpecialization(BaseModel):
         verbose_name = 'Destination Specialization'
         verbose_name_plural = 'm. Destination Specialization'
         ordering = ('-date_added',)
+        unique_together = ('destination', 'courses') 
 
     def __str__(self):
         return f"Destination Specialization {self.destination} - {self.courses}"
