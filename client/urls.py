@@ -76,6 +76,7 @@ urlpatterns = [
     # Destination specialization
     path('destination-specialization/', views.DestinationSpecializationView.as_view(), name='destination_specialization'),
     path('destination-specialization/<slug:slug>/', views.DestinationSpecializationView.as_view(), name='destination_specialization_by_destination'),
+    path('destination-specialization/<slug:slug>/<str:course>/', views.DestinationSpecializationView.as_view(), name='destination_specialization_by_destination_and_course'),
     
     #Leads URLs
     path('event-registration/', views.EventRegistrationPostAPIView.as_view(), name='event_registration'), 
