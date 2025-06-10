@@ -253,7 +253,7 @@ class Country(BaseModel):
         ordering = ('-date_added',)
 
     def __str__(self):
-        return f"Destinations {self.id}"
+        return f"Destinations {self.country}"
     
 class Events(BaseModel):
     ordering_priority = models.PositiveIntegerField(default=0, blank=True, null=True, help_text="Order of the event for display purposes")
