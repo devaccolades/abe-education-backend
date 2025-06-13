@@ -17,6 +17,7 @@ urlpatterns = [
     path('bank-property-documents/', views.BankPropertyDocumentsView.as_view(), name='bank-property-documents'),
     path('countries/', views.CountryViewset.as_view(), name='countries-list'),
     path('study-level/', views.StudyLevelViewset.as_view(), name='study-level-list'),
+    path('specialization/', views.SpecializationViewset.as_view(), name='specialization-list'),
 
     path('events/', views.EventsViewset.as_view(), name='events-list'),
     path('events/<slug:slug>', views.EventsViewset.as_view(), name='get_event_by_slug'),
