@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import *
-from core.serializer import SpecializationSerializer
+# from core.serializer import SpecializationSerializer
 
 
 
@@ -172,7 +172,7 @@ class CostOfStudySerializer(serializers.ModelSerializer):
 
 class DestinationSpecializationSerializer(serializers.ModelSerializer):
     destination_name = serializers.CharField(source='destination.destination', read_only=True)
-    specialization_areas = SpecializationSerializer(many=True, read_only=True)
+    # specialization_areas = SpecializationSerializer(many=True, read_only=True)
     
 
     class Meta:
