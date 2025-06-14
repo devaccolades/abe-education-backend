@@ -374,7 +374,6 @@ class CostOfStudy(BaseModel):
 
 
 #specialization page
-
 COURSE_CHOICES = (
     ('Diploma', 'Diploma'),
     ('Undergraduate', 'Undergraduate'),
