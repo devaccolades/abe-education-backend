@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import *
-from destination.serializer import DestinationsSerializer
+# from destination.serializer import DestinationsSerializer
 
 
 class SEOSerializer(serializers.ModelSerializer):
@@ -70,7 +70,7 @@ class StudyLevelSerializer(serializers.ModelSerializer):
         fields = ['id', 'level_name']
 
 class EventSerializer(serializers.ModelSerializer):
-    study_destination = DestinationsSerializer(many=True, read_only=True)
+    study_destination = CountrySerializer(many=True, read_only=True)
     study_level = StudyLevelSerializer(many=True, read_only=True)
 
     class Meta:
