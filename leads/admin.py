@@ -19,12 +19,12 @@ class GetExpertAdviceFormAdmin(BaseAdmin):
     search_fields = ('name', 'email', 'phone', 'preferred_course')
     list_filter = ('date_added', 'is_deleted')
 
-@admin.register(FreeConsultationForm)
-class FreeConsultationFormAdmin(BaseAdmin):
-    resource_class=FreeConsultationResource
-    list_display = ('name', 'email', 'phone', 'preferred_country', 'preferred_course', 'date_added', 'date_updated', 'is_deleted')
-    search_fields = ('name', 'email', 'phone', 'preferred_country')
-    list_filter = ('date_added', 'is_deleted')
+# @admin.register(FreeConsultationForm)
+# class FreeConsultationFormAdmin(BaseAdmin):
+#     resource_class=FreeConsultationResource
+#     list_display = ('name', 'email', 'phone', 'preferred_country', 'preferred_course', 'date_added', 'date_updated', 'is_deleted')
+#     search_fields = ('name', 'email', 'phone', 'preferred_country')
+#     list_filter = ('date_added', 'is_deleted')
 
 @admin.register(SpecializationEnquiryForm)
 class SpecializationEnquiryFormAdmin(BaseAdmin):
@@ -60,3 +60,11 @@ class GetExpertCoachingFormAdmin(BaseAdmin):
     list_display = ('name', 'email', 'phone', 'preferred_country', 'preferred_time', 'mode_of_coaching', 'date_added', 'date_updated', 'is_deleted')
     search_fields = ('name', 'email', 'phone', 'preferred_country')
     list_filter = ('date_added', 'is_deleted')
+
+
+@admin.register(ScholarshipEnquireForm)
+class ScholarshipEnquireAdmin(BaseAdmin):
+    resource_class=ScholarshipEnquireResource
+    list_display = ('name', 'email', 'phone', 'date_added', 'date_updated', 'is_deleted')
+    search_fields = ('name', 'email', 'phone', 'scholarship_title',  'preferred_country', )
+    list_filter = ('preferred_country', 'scholarship_title','date_added', 'is_deleted')

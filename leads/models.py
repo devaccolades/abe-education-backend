@@ -112,6 +112,24 @@ class UniversityEnquiryForm(BaseModel):
     def __str__(self):
         return f"University Enquiry - {self.name}"
     
+
+class ScholarshipEnquireForm(BaseModel):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    email = models.EmailField(max_length=255, null=True, blank=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    scholarship_title = models.CharField(max_length=255, null=True, blank=True)
+    preferred_country = models.CharField(max_length=255, null=True, blank=True)
+
+    class Meta:
+        db_table = 'leads.scholarship_enquiry_form'
+        verbose_name = 'Scholarship Enquiry'
+        verbose_name_plural = 'Scholarship Enquiries'
+        ordering = ('-date_added',)
+
+
+    def __str__(self):
+        return f"{self.name}"
+    
 #training
 class EnrolForTrainingForm(BaseModel):
     name = models.CharField(max_length=255, null=True, blank=True)
