@@ -45,3 +45,8 @@ class TrainingContactResource(resources.ModelResource):
     class Meta:
         model = TrainingContactForm
         exclude = ['id', 'is_deleted', 'date_updated']
+
+class ScholarshipEnquireResource(resources.ModelResource):
+    class Meta:
+        model = ScholarshipEnquireForm
+        exclude = ['id', 'is_deleted', 'date_updated']

@@ -88,6 +88,7 @@ urlpatterns = [
     path('university-enquiry/', views.UniversityEnquiryPostAPIView.as_view(), name='university_enquiry'),
     path('enrol-for-training/', views.EnrolForTrainingPostAPIView.as_view(), name='enrol_for_training'),
     path('training-contact/', views.TrainingContactPostAPIView.as_view(), name='training_contact'),
+    path('scholarship-enquiry/', views.ScholarshipEnquirePostAPIView.as_view(), name='scholarship-enquiry'),
 
     #Training URLs
     path('training-evaluation/', views.TrainingEvaluationViewset.as_view(), name='training-evaluation'),

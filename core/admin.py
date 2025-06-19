@@ -11,10 +11,10 @@ class BlogsAdmin(ModelAdmin):
     list_filter = ('date_added', 'is_deleted')
     prepopulated_fields = {'slug': ('title',)}
 
-@admin.register(Testimonials)
-class TestimonialAdmin(ModelAdmin):
-    search_fields = ('name', 'location', 'review_text')
-    list_filter = ('date_added', 'is_deleted')
+# @admin.register(Testimonials)
+# class TestimonialAdmin(ModelAdmin):
+#     search_fields = ('name', 'location', 'review_text')
+#     list_filter = ('date_added', 'is_deleted')
 
 @admin.register(Faq)
 class FaqAdmin(ModelAdmin):

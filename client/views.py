@@ -904,19 +904,7 @@ class CostOfStudyView(APIView):
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-# class DestinationSpecializationView(APIView):
-#     serializer_class = destination_serializer.DestinationSpecializationSerializer
 
-#     def get(self, request, slug=None):
-#         try:
-#             if slug:
-#                 data = destination_models.DestinationSpecialization.objects.filter(is_deleted=False, destination__slug=slug)
-#             else:
-#                 data = destination_models.DestinationSpecialization.objects.filter(is_deleted=False)
-#             serializer = self.serializer_class(data, many=True, context={"request": request})
-#             return Response(serializer.data)
-#         except Exception as e:
-#             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 class DestinationSpecializationView(APIView):
     serializer_class = destination_serializer.DestinationSpecializationSerializer
 
@@ -1263,6 +1251,54 @@ class TrainingContactPostAPIView(APIView):
                 "detail": "error",
                 "data": "",
                 "message": f'Something went wrong: {e}'
+            }
+        return Response(response_data, status=status.HTTP_200_OK)
+    
+
+class ScholarshipEnquirePostAPIView(APIView):
+    def post(self,request):
+        try:
+            serializer = leads_serializer.ScholarshipEnquireSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+
+                context = {
+                    'name': serializer.data['name'],
+                    'email': serializer.data['email'],
+                    'phone': serializer.data['phone'],
+                    'scholarship_title': serializer.data['scholarship_title'],
+                    'preferred_country': serializer.data['preferred_country'],
+                   'date_added': serializer.data['date_added']
+                }
+                template = get_template('ScholarshipEnquiry.html').render(context)
+                e=settings.EMAIL_HOST_USER
+                send_mail(
+                    'Enquiry for abe-education',
+                    None, 
+                    settings.EMAIL_HOST_USER,
+                    ["manjima.accolades@gmail.com"],
+                    fail_silently=False,
+                    html_message = template,
+                    )
+                response_data    = {
+                    "StatusCode": 6001,
+                    "detail": "success",
+                    "data": serializer.data,
+                    "message": "Enquiry successfully"
+                }
+            else:
+                response_data = {
+                    "StatusCode": 6002,
+                    "detail": "validation error",
+                    "data": serializer.errors,
+                    "message": ""
+                }
+        except Exception as e:
+            response_data = {
+                "StatusCode": 6002,
+                "detail": "error",
+                "data":"",
+                "message": f'Something went wrong {e}'
             }
         return Response(response_data, status=status.HTTP_200_OK)
 

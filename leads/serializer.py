@@ -43,3 +43,8 @@ class GetExpertCoachingFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = GetExpertCoachingForm
         fields = '__all__'
+
+class ScholarshipEnquireSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ScholarshipEnquireForm
+        fields = '__all__'
