@@ -2,7 +2,8 @@ from django.contrib import admin
 
 from .models import *
 from unfold.admin import ModelAdmin
-
+from core.adminbase import BaseAdmin
+from .resources import JobApplicationFormResource
 
 # Register your models here.
 @admin.register(Careers)
@@ -13,7 +14,8 @@ class CareersAdmin(ModelAdmin):
 
 
 @admin.register(JobApplicationForm)
-class JobApplicationAdmin(ModelAdmin):
+class JobApplicationAdmin(BaseAdmin):
+    resource_class=JobApplicationFormResource
     list_display = ('name', 'position', 'email', 'date_added', 'date_updated', 'is_deleted')
     search_fields = ('name', 'position', 'email')
     list_filter = ('date_added', 'is_deleted')
