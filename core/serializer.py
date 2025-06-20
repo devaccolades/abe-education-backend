@@ -75,7 +75,7 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Events
-        fields = ['id', 'title', 'description', 'start_date', 'end_date', 'start_time', 'end_time', 'location', 'services', 'study_destination', 'study_level', 'about_event', 'image', 'image_alt', 'card_image', 'card_image_alt', 'meta_title', 'meta_description', 'slug']
+        fields = ['id', 'title', 'description', 'start_date', 'end_date', 'start_time', 'end_time', 'location', 'services', 'study_destination', 'study_level', 'about_event', 'image', 'image_alt', 'card_image', 'card_image_alt', 'meta_title', 'meta_description', 'slug', 'is_featured']
 
 class EventFaqSerializer(serializers.ModelSerializer):
     class Meta:
