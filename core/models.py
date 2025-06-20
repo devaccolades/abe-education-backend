@@ -275,6 +275,7 @@ class Events(BaseModel):
     meta_title = models.CharField(max_length=300, blank=True, null=True)
     meta_description = models.TextField(blank=True, null=True)
     slug = models.SlugField(unique=True)
+    is_featured = models.BooleanField(default=False, help_text="Set to True to feature the event on the homepage")
 
     class Meta:
         db_table = 'core.events'
