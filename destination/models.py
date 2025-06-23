@@ -9,7 +9,7 @@ class Destinations(BaseModel):
     flag_alt = models.CharField(max_length=20, null=True, blank=True)
     home_image = models.FileField(upload_to='destinations', blank=True, null=True)
     home_image_alt = models.CharField(max_length=20, null=True, blank=True)
-    home_description = models.CharField(max_length=260, null=True, blank=True)
+    home_description = models.CharField(max_length=350, null=True, blank=True)
     meta_title = models.CharField(max_length=100, null=True, blank=True)
     meta_description = models.CharField(max_length=200, null=True, blank=True)
     specialization_image = models.FileField(upload_to='destinations', blank=True, null=True)

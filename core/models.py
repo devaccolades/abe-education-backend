@@ -143,7 +143,7 @@ class BranchDetails(BaseModel):
 
 class HomeCards(BaseModel):
     title = models.CharField(max_length=16, null=True, blank=True)
-    subtitle = models.CharField(max_length=20, null=True, blank=True)
+    subtitle = models.CharField(max_length=26, null=True, blank=True)
 
     class Meta:
         db_table = 'core.home_cards'
