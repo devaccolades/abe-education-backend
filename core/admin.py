@@ -96,3 +96,8 @@ class SpecializationAdmin(ModelAdmin):
     search_fields = ('specialization_area',)
     list_filter = ('date_added', 'is_deleted')
    
+@admin.register(PopupFeatured)
+class PopupFeaturedAdmin(ModelAdmin):
+    list_display = ('title', 'image', 'image_alt', 'date_added', 'date_updated', 'is_deleted')
+    search_fields = ('title',)
+    list_filter = ('date_added', 'is_deleted')

@@ -385,6 +385,29 @@ class SpecializationViewset(APIView):
             
         except Exception as e:
             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+
+class PopupFeaturedActiveView(APIView):
+    serializer_class = core_serializer.PopupFeaturedSerializer
+
+    def get(self, request):
+        try:
+            # Filter by is_active and is_deleted, order by most recent
+            popup = (
+                core_models.PopupFeatured.objects
+                .filter(is_deleted=False, is_active=True)
+                .order_by('-date_added')
+                .first()
+            )
+
+            if popup:
+                serializer = self.serializer_class(popup, context={"request": request})
+                return Response(serializer.data)
+            else:
+                return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
  
 
                 

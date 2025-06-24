@@ -23,6 +23,8 @@ urlpatterns = [
     path('events/<slug:slug>', views.EventsViewset.as_view(), name='get_event_by_slug'),
 
     path('event-faq/', views.EventFaqViewset.as_view(), name='event-faq-list'),
+
+    path('popup-featured/active/', views.PopupFeaturedActiveView.as_view(), name='popup-featured-active'),
     
     
     # Career URLs
