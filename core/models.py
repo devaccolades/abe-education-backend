@@ -48,6 +48,8 @@ class SEO(BaseModel):
     path=models.CharField(max_length=200)
     meta_title=models.TextField(blank=True,null=True)
     meta_description=models.TextField(blank=True,null=True)
+    meta_keywords = models.TextField(default="Abe Educational Services", blank=True, null=True, help_text="Enter keywords separated by commas")
+
     class Meta:
         db_table='core.seo'
         verbose_name = ('SEO')
@@ -275,7 +277,7 @@ class Events(BaseModel):
     meta_title = models.CharField(max_length=300, blank=True, null=True)
     meta_description = models.TextField(blank=True, null=True)
     slug = models.SlugField(unique=True)
-    is_featured = models.BooleanField(default=False, help_text="Set to True to feature the event on the homepage")
+    # is_featured = models.BooleanField(default=False, help_text="Set to True to feature the event on the homepage")
 
     class Meta:
         db_table = 'core.events'
@@ -314,3 +316,20 @@ class Specialization(BaseModel):
 
     def __str__(self):
         return str(self.specialization_area) if self.specialization_area else str(self.id)
+    
+class PopupFeatured(BaseModel):
+    title = models.CharField(max_length=200, null=True, blank=True)
+    description = models.CharField(max_length=325, null=True, blank=True)
+    image = models.FileField(upload_to='popup_featured/images', blank=True, null=True)
+    image_alt = models.CharField(max_length=125, null=True, blank=True)
+    path = models.CharField(max_length=500, null=True, blank=True, help_text="Enter the link for the popup featured.")
+    is_active = models.BooleanField(default=False, help_text="Set to True to make the popup featured active.")
+
+    class Meta:
+        db_table = 'core.popup_featured'
+        verbose_name = 'Popup Featured'
+        verbose_name_plural = 'Popup Featured'
+        ordering = ('-date_added',)
+
+    def __str__(self):
+        return str(self.title) if self.title else str(self.id)  
