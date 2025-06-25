@@ -6,7 +6,7 @@ from .models import *
 class SEOSerializer(serializers.ModelSerializer):
     class Meta:
         model = SEO  
-        fields = ['id', 'page', 'path', 'meta_title','meta_description']
+        fields = ['id', 'page', 'path', 'meta_title','meta_description', 'meta_keywords']
         
 
 
