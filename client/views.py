@@ -446,7 +446,7 @@ class JobApplicationPostAPIView(APIView):
                 html_content = get_template('JobApplication.html').render(context)
                 subject = 'Enquiry for abe-education'
                 from_email = settings.EMAIL_HOST_USER
-                to_email = ['manjima.accolades@gmail.com']
+                to_email =  ["Enquiries@abeservices.in"]
 
                 msg = EmailMultiAlternatives(subject, '', from_email, to_email)
                 msg.attach_alternative(html_content, "text/html")
@@ -978,7 +978,7 @@ class EventRegistrationPostAPIView(APIView):
                     'New Event Registration on abe-education',
                     None,
                     e,
-                    ["manjima.accolades@gmail.com"],  # Change this to the admin's email
+                    ["Enquiries@abeservices.in"],  # Change this to the admin's email
                     fail_silently=False,
                     html_message=template,
                 )
@@ -1017,7 +1017,7 @@ class GetExpertAdvicePostAPIView(APIView):
                     'New Get Expert Advice Submission on abe-education',
                     None,
                     settings.EMAIL_HOST_USER,
-                    ["manjima.accolades@gmail.com"],
+                    ["Enquiries@abeservices.in"], 
                     fail_silently=False,
                     html_message=template,
                 )
@@ -1056,7 +1056,7 @@ class GetExpertCoachingPostAPIView(APIView):
                     'New Get Expert Coaching Submission on abe-education',
                     None,
                     settings.EMAIL_HOST_USER,
-                    ["manjima.accolades@gmail.com"],
+                     ["Enquiries@abeservices.in"], 
                     fail_silently=False,
                     html_message=template,
                 )
@@ -1095,7 +1095,7 @@ class FreeConsultationPostAPIView(APIView):
                     'New Free Consultation Submission on abe-education',
                     None,
                     settings.EMAIL_HOST_USER,
-                    ["manjima.accolades@gmail.com"],
+                    ["Enquiries@abeservices.in"], 
                     fail_silently=False,
                     html_message=template,
                 )
@@ -1134,7 +1134,7 @@ class SpecializationEnquiryPostAPIView(APIView):
                     'New Specialization Enquiry Submission on abe-education',
                     None,
                     settings.EMAIL_HOST_USER,
-                    ["manjima.accolades@gmail.com"],
+                    ["Enquiries@abeservices.in"], 
                     fail_silently=False,
                     html_message=template,
                 )
@@ -1173,7 +1173,7 @@ class UniversityEnquiryPostAPIView(APIView):
                     'New University Enquiry Submission on abe-education',
                     None,
                     settings.EMAIL_HOST_USER,
-                    ["manjima.accolades@gmail.com"],
+                     ["Enquiries@abeservices.in"], 
                     fail_silently=False,
                     html_message=template,
                 )
@@ -1212,7 +1212,7 @@ class EnrolForTrainingPostAPIView(APIView):
                     'New Enrolment for Training on abe-education',
                     None,
                     settings.EMAIL_HOST_USER,
-                    ["manjima.accolades@gmail.com"],
+                    ["Enquiries@abeservices.in"], 
                     fail_silently=False,
                     html_message=template,
                 )
@@ -1251,7 +1251,7 @@ class TrainingContactPostAPIView(APIView):
                     'New Training Contact Submission on abe-education',
                     None,
                     settings.EMAIL_HOST_USER,
-                    ["manjima.accolades@gmail.com"],
+                     ["Enquiries@abeservices.in"], 
                     fail_silently=False,
                     html_message=template,
                 )
@@ -1299,7 +1299,7 @@ class ScholarshipEnquirePostAPIView(APIView):
                     'Enquiry for abe-education',
                     None, 
                     settings.EMAIL_HOST_USER,
-                    ["manjima.accolades@gmail.com"],
+                     ["Enquiries@abeservices.in"], 
                     fail_silently=False,
                     html_message = template,
                     )
